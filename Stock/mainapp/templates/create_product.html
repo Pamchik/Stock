@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Create</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="card-deck mb-3 text-start">
+    <h1 class="card-deck mb-3 text-center">Создать новый продукт</h1><br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.category }}<br>
+        {{ form.location }}<br>
+        {{ form.place }}<br>
+        {{ form.name }}<br>
+        {{ form.description }}<br>
+        {{ form.image }}<br><br>
+        <p class="text-danger">*Обязательное поле для заполнения</p><br>
+        <button type="submit" class="btn btn-success">Добавить</button><br>
+
+
+
+        <span>{{ error }}</span>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}

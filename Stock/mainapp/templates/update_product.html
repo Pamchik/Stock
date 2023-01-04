@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Update</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="card-deck mb-3 text-start">
+    <h1 class="card-deck mb-3 text-center">Обновить данные по продукту</h1><br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.category }}<br>
+        {{ form.location }}<br>
+        {{ form.place }}<br>
+        {{ form.name }}<br>
+        {{ form.description }}<br>
+        {{ form.image }}<br><br>
+        <p class="text-danger">*Обязательное поле для заполнения</p><br>
+        <button type="submit" class="btn btn-success">Обновить</button><br>
+<a class="btn btn-primary" href="{% url 'product-detail' product.id %}" role="button">Link</a>
+
+
+        <span>{{ error }}</span>
+    </form>
+
+  </div>
+</div>
+
+
+{% endblock %}
