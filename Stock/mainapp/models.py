@@ -47,7 +47,7 @@ class Stock(models.Model):
     place = models.CharField(max_length=255, verbose_name="Точное место", null=True, blank=True)
     name = models.CharField(max_length=255, verbose_name="Название", null=False)
     description = models.TextField(max_length=2000, verbose_name="Описание", null=True, blank=True)
-    slug = AutoSlugField(populate_from='name', editable=False, always_update=True)
+    slug = AutoSlugField(populate_from='name', editable=True, always_update=True)
     image = models.ImageField(verbose_name="Фотография", upload_to='photos_parts', default='default.jpg')
 
     def __str__(self):
@@ -55,7 +55,7 @@ class Stock(models.Model):
 
 
     def get_absolute_url(self):
-        return f'/stock/{self.id}'
+        return f'/stock/self/{self.slug}'
 
     class Meta:
         verbose_name = 'Stock'

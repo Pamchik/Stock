@@ -13,7 +13,7 @@
             <h3>Подтвердите удаление продукта: {{ product.name }}</h3>
         </div>
         <button type="submit" class="btn btn-success">Удалить запись</button><br>
-        <a href="{% url 'product-detail' product.id %}" class="btn btn-info">Отмена</a>
+        <a href="{% url 'product-detail' product.slug %}" class="btn btn-info">Отмена</a>
         <span>{{ error }}</span>
     </form>
   </div>

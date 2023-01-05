@@ -140,8 +140,17 @@
                             <a href="{% url 'stock' %}" class="nav-link link-dark">
                                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                                 Stock
+
                             </a>
                         </li>
+                        {% for el in category %}
+                        <li>
+                            <a name="cat-name" class="nav-link link-dark">
+                                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                                {{ el.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
 <!--                        <li>-->
 <!--                        {% for el in model.AssortmentCategory %}-->
 <!--                            <a href="{% url 'category-filter' category.id %}" class="nav-link link-dark">-->
