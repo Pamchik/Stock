@@ -112,8 +112,9 @@
 
 
 <body>
+
 <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <div class="container-fluid">
+    <div class="container-xxl">
         <a class="navbar-brand" href="{% url 'home' %}">IBS PROJECT</a>
 
         <div class="navbar-collapse collapse" id="navbarCollapse">
@@ -125,9 +126,25 @@
         </div>
     </div>
 </header>
+
 <section class="main-section">
-    <div class="container">
+    <div class="container-xxl">
         <div class="d-flex flex-nowrap">
+
+<!--            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">-->
+<!--  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>-->
+<!--  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>-->
+<!--  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>-->
+<!--  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>-->
+<!--</div>-->
+<!--<div class="tab-content" id="v-pills-tabContent">-->
+<!--  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>-->
+<!--  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>-->
+<!--  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>-->
+<!--  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>-->
+<!--</div>-->
+
+
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="width: 200px;">
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav nav-pills flex-column mb-auto">
@@ -137,22 +154,12 @@
                                 Home
                             </a>
                         </li>
-
                         <li>
                             <a href="{% url 'stock' %}" class="nav-link link-dark">
                                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                                 Stock
                             </a>
                         </li>
-                        <!--                        <li>-->
-                        <!--                        {% for el in model.AssortmentCategory %}-->
-                        <!--                            <a href="{% url 'category-filter' category.id %}" class="nav-link link-dark">-->
-                        <!--                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>-->
-                        <!--                                {{ el.name }}-->
-                        <!--                            </a>-->
-                        <!--                            </li>-->
-                        <!--                        {% endfor %}-->
-                        <!--                        </li>-->
                         <li>
                             <a href="{% url 'history' %}" class="nav-link link-dark">
                                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#history"></use></svg>
@@ -175,94 +182,84 @@
                     </ul>
                 </div>
             </nav>
-
-
-
-<!--            <div class="container-fluid"><br>-->
-                <!--                <div class="card mb-4 mb-3 shadow-sm">-->
-                <div class="row" style="height: 300px;">
-
-                    <div class="col-md-4">
-                        <img src="D:\Programming\IBS_Stock\Stock\media\default.jpg" style="img-thumbnail">
+            <div class="row">
+                <div class="col">
+                    <img src="C:\Users\Alexander.Eremin\PycharmProjects\Stock\Stock\media\default.jpg" class="img-fluid" alt="Responsive image">
+<!--                    <img src="C:\Users\Alexander.Eremin\PycharmProjects\Stock\Stock\media\default.jpg">-->
+                        <div class="d-grid">
+                            <a href="#" class="btn btn-danger">Удалить запись</a>
+                            <a href="#" class="btn btn-info">Редактировать запись</a>
+                        </div>
+                </div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="d-flex flex-column" style="height: 250px;">
+                            <br><h3>Имя продукта</h3>
+                            <p>Описание: абра кадабра, описывается товар, который необходим для того</p><br>
+                            <p>Расположение: Склад</p>
+                            <p>Бокс №</p><br>
+                        </div>
                     </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="d-flex flex-column" style="height: 150px;">
-                                <!--                                <div class="d-grid gap-2">-->
-                                <br><h3>Имя продукта</h3>
-                                <p>Описание: абра кадабра, описывается товар, который необходим для того</p><br>
-                                <!--                                </div>-->
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!--                                <main class="col-md-9 col-lg-10 px-md-4">-->
-                            <!--                                    <div class="chartjs-size-monitor">-->
-                            <!--                                        <div class=""></div>-->
-                            <!--                                    </div>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <div class="row">-->
+                        <!--                                <main class="col-md-9 col-lg-10 px-md-4">-->
+                        <!--                                    <div class="chartjs-size-monitor">-->
+                        <!--                                        <div class=""></div>-->
+                        <!--                                    </div>-->
 
-                            <!--                            </div>-->
-                            <h2>Section title</h2>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-sm">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">good</th>
-                                        <th scope="col">used</th>
-                                        <th scope="col">defect</th>
-                                        <th scope="col">sold</th>
-                                        <th scope="col">total</th>
-                                        <th scope="col">in system</th>
-                                        <th scope="col">out system</th>
-                                        <th scope="col">comment</th>
+                        <!--                            </div>-->
+                    <div class="row">
+                        <h2>Section title</h2>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">good</th>
+                                    <th scope="col">used</th>
+                                    <th scope="col">defect</th>
+                                    <th scope="col">sold</th>
+                                    <th scope="col">total</th>
+                                    <th scope="col">in system</th>
+                                    <th scope="col">out system</th>
+                                    <th scope="col">comment</th>
 
-                                    </tr>
-                                    </thead>
+                                </tr>
+                                </thead>
 
-                                    <tbody>
+                                <tbody>
 
-                                    <tr>
-                                        <th scope="row">склад</th>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>text</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">офис</th>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>qty</td>
-                                        <td>text</td>
-                                    </tr>
+                                <tr>
+                                    <th scope="row">склад</th>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>text</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">офис</th>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>qty</td>
+                                    <td>text</td>
+                                </tr>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--                                </main>-->
-                        </div>
-                        <div class="row">
-                            <!--                                <div class="card-body">-->
-                            <!--                                    <div class="mx-auto">-->
-                            <div class="col">
-                                <div class="d-grid gap-2 col-4">
-                                    <a href="#" class="btn btn-danger">Удалить запись</a>
-                                    <a href="#" class="btn btn-info">Редактировать запись</a>
-                                </div>
-                            </div>
-                            <!--                                </div>-->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-<!--            </div>-->
+            </div>
+
         </div>
     </div>
 </section>
