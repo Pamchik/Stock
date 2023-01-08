@@ -8,21 +8,21 @@ class StockForm(ModelForm):
         fields = ['category', 'location', 'place', 'name', 'description', 'image']
         widgets = {
             'category': Select(attrs={
-                'class': 'form-control'
+                'class': 'form-control form-control-sm'
             }),
             'location': Select(attrs={
-                'class': 'form-control'
+                'class': 'form-control form-control-sm'
             }),
             'place': TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Введите короб'
             }),
             'name': TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Введите название'
             }),
             'description': Textarea(attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Введите описание'
             })
         }

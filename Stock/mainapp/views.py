@@ -70,7 +70,7 @@ def history(request):
 def create(request):
     error = ''
     if request.method == 'POST':
-        form = StockForm(request.POST)
+        form = StockForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('stock')
