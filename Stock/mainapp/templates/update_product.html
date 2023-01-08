@@ -7,18 +7,47 @@
 <div class="container">
   <div class="card-deck mb-3 text-start">
     <h1 class="card-deck mb-3 text-center">Обновить данные по продукту</h1><br>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.category }}<br>
-        {{ form.location }}<br>
-        {{ form.place }}<br>
-        {{ form.name }}<br>
-        {{ form.description }}<br>
-        {{ form.image }}<br><br>
-        <p class="text-danger">*Обязательное поле для заполнения</p><br>
-        <button type="submit" class="btn btn-success">Обновить</button><br>
-<a class="btn btn-primary" href="{% url 'product-detail' product.slug %}" role="button">Link</a>
-
+      <div class="form-group row">
+        <label class="col-sm col-form-label">Выберите категорию</label>
+        <div class="col-sm-9">
+          {{ form.category }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm col-form-label">Выберите место хранения</label>
+        <div class="col-sm-9">
+          {{ form.location }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm col-form-label">Введите точное место хранения</label>
+        <div class="col-sm-9">
+          {{ form.place }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm col-form-label">Введите название</label>
+        <div class="col-sm-9">
+          {{ form.name }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm col-form-label">Введите описание</label>
+        <div class="col-sm-9">
+          {{ form.description }}<br>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm col-form-label">Выберите изображение</label>
+        <div class="col-sm-9">
+          {{ form.image }}
+        </div>
+      </div>
+            <p class="text-danger">*Обязательное поле для заполнения</p>
+        <button type="submit" class="btn btn-success">Обновить</button>
+        <a class="btn btn-primary" href="{% url 'product-detail' product.slug %}" role="button">Link</a>
 
         <span>{{ error }}</span>
     </form>
