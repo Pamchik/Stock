@@ -1,5 +1,5 @@
 from .models import Stock
-from django.forms import ModelForm, TextInput, Select, Textarea
+from django.forms import ModelForm, TextInput, Select, Textarea, ImageField
 
 
 class StockForm(ModelForm):
@@ -24,7 +24,7 @@ class StockForm(ModelForm):
             'description': Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите описание'
-            }),
+            })
         }
 
 

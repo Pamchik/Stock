@@ -105,13 +105,9 @@
     <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
   </symbol></svg>
 
-
-
-
-
 <body>
     <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <div class="container-fluid">
+        <div class="container-xxl">
             <a class="navbar-brand" href="{% url 'home' %}">IBS PROJECT</a>
 
             <div class="navbar-collapse collapse" id="navbarCollapse">
@@ -124,13 +120,13 @@
         </div>
     </header>
 
-    <div class="container-fluid">
+    <div class="container-xxl">
         <div class="d-flex flex-nowrap">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="width: 200px;">
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
-                            <a href="{% url 'home' %}" class="nav-link active" aria-current="page">
+                            <a href="{% url 'home' %}" class="nav-link link-dark" aria-current="page">
                                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                                 Home
                             </a>
@@ -143,35 +139,18 @@
 
                             </a>
                         </li>
-                        {% for el in category %}
-                        <li>
-                            <a name="cat-name" class="nav-link link-dark">
-                                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                                {{ el.name }}
-                            </a>
-                        </li>
-                        {% endfor %}
-<!--                        <li>-->
-<!--                        {% for el in model.AssortmentCategory %}-->
-<!--                            <a href="{% url 'category-filter' category.id %}" class="nav-link link-dark">-->
-<!--                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>-->
-<!--                                {{ el.name }}-->
-<!--                            </a>-->
-<!--                            </li>-->
-<!--                        {% endfor %}-->
-<!--                        </li>-->
                         <li>
                             <a href="{% url 'history' %}" class="nav-link link-dark">
                                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#history"></use></svg>
                                 History
                             </a>
                         </li>
-                        <li>
-                            <a href="{% url 'create' %}" class="nav-link link-dark">
-                                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                                Create
-                            </a>
-                        </li>
+<!--                        <li>-->
+<!--                            <a href="{% url 'create' %}" class="nav-link link-dark">-->
+<!--                                <svg class="bi pe-none me-2" width="16" height="16"></svg>-->
+<!--                                Create-->
+<!--                            </a>-->
+<!--                        </li>-->
                         <li class="border-top my-3"></li>
                         <li>
                             <a href="#" class="nav-link link-dark">
@@ -182,24 +161,6 @@
                     </ul>
                 </div>
             </nav>
-
-<!--            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">-->
-<!--                <div class="chartjs-size-monitor">-->
-<!--                    <div class="chartjs-size-monitor-expand">-->
-<!--                        <div class="">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="chartjs-size-monitor-shrink">-->
-<!--                        <div class="">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--            </main>-->
-
-
-
-
         {% block body %}{% endblock %}
        </div>
     </div>

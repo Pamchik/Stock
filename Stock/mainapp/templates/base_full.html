@@ -114,7 +114,7 @@
 <body>
 
 <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <div class="container-xxl">
+    <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">IBS PROJECT</a>
 
         <div class="navbar-collapse collapse" id="navbarCollapse">
@@ -131,57 +131,57 @@
     <div class="container-xxl">
         <div class="d-flex flex-nowrap">
 
-<!--            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">-->
-<!--  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>-->
-<!--  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>-->
-<!--  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>-->
-<!--  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>-->
-<!--</div>-->
-<!--<div class="tab-content" id="v-pills-tabContent">-->
-<!--  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>-->
-<!--  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>-->
-<!--  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>-->
-<!--  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>-->
-<!--</div>-->
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+</div>
+<div class="tab-content" id="v-pills-tabContent">
+  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+</div>
 
 
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="width: 200px;">
-                <div class="position-sticky pt-3 sidebar-sticky">
-                    <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item">
-                            <a href="{% url 'home' %}" class="nav-link active" aria-current="page">
-                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'stock' %}" class="nav-link link-dark">
-                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                                Stock
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'history' %}" class="nav-link link-dark">
-                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#history"></use></svg>
-                                History
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'create' %}" class="nav-link link-dark">
-                                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                                Create
-                            </a>
-                        </li>
-                        <li class="border-top my-3"></li>
-                        <li>
-                            <a href="#" class="nav-link link-dark">
-                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                                Account
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+<!--            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="width: 200px;">-->
+<!--                <div class="position-sticky pt-3 sidebar-sticky">-->
+<!--                    <ul class="nav nav-pills flex-column mb-auto">-->
+<!--                        <li class="nav-item">-->
+<!--                            <a href="{% url 'home' %}" class="nav-link active" aria-current="page">-->
+<!--                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>-->
+<!--                                Home-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="{% url 'stock' %}" class="nav-link link-dark">-->
+<!--                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>-->
+<!--                                Stock-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="{% url 'history' %}" class="nav-link link-dark">-->
+<!--                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#history"></use></svg>-->
+<!--                                History-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="{% url 'create' %}" class="nav-link link-dark">-->
+<!--                                <svg class="bi pe-none me-2" width="16" height="16"></svg>-->
+<!--                                Create-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="border-top my-3"></li>-->
+<!--                        <li>-->
+<!--                            <a href="#" class="nav-link link-dark">-->
+<!--                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>-->
+<!--                                Account-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </nav>-->
             <div class="row">
                 <div class="col">
                     <img src="C:\Users\Alexander.Eremin\PycharmProjects\Stock\Stock\media\default.jpg" class="img-fluid" alt="Responsive image">
@@ -263,8 +263,10 @@
         </div>
     </div>
 </section>
+<!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
-
-    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 </html>

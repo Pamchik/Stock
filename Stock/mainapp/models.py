@@ -53,9 +53,8 @@ class Stock(models.Model):
     def __str__(self):
         return self.name
 
-
     def get_absolute_url(self):
-        return f'/stock/self/{self.slug}'
+        return f'/stock/{self.slug}'
 
     class Meta:
         verbose_name = 'Stock'
@@ -88,25 +87,3 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.slug
-
-#
-#
-# class TransactionTo(models.Model):
-#     location_to = models.ForeignKey(Location, verbose_name="Куда (место)", on_delete=models.CASCADE, null=False)
-#     qty_to = models.ForeignKey(AssortmentQualityCategory, verbose_name="Куда (качество)", on_delete=models.CASCADE, null=False)
-
-
-
-# class QuantityProducts(models.Model):
-#     name = models.ForeignKey(Stock, verbose_name="Название", on_delete=models.CASCADE, null=False)
-#     type_quality_product = models.ForeignKey(AssortmentQualityCategory, verbose_name="Название", on_delete=models.CASCADE, null=False)
-#     qty = models.DecimalField(max_digits=9, decimal_places=0, verbose_name="Количество в системе", null=False, default=0)
-
-
-
-
-
-    # in_system_qty = models.DecimalField(max_digits=9, decimal_places=0, verbose_name="Количество в системе", null=False, default=0)
-    # out_system_qty = models.DecimalField(max_digits=9, decimal_places=0, verbose_name="Количество не в системе", null=False, default=0)
-
-

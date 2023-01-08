@@ -9,6 +9,15 @@ class ProductDetailView(DetailView):
     template_name = 'product_detail.html'
     context_object_name = 'product'
 
+    def get_context_data(self, **kwargs):
+
+        name = self.object.slug
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['quality'] = AssortmentQualityCategory.objects.all()
+        context['location'] = Location.objects.all()
+        context['transaction'] = Transaction.objects.filter(slug=name)
+        return context
+
 
 class ProductUpdateView(UpdateView):
     model = Stock
@@ -24,6 +33,16 @@ class ProductDeleteView(DeleteView):
     context_object_name = 'product'
 
 
+def product_filter(request):
+    context = {
+        'category': AssortmentCategory.objects.all(),
+        'quality_category': AssortmentQualityCategory.objects.all(),
+        'stock': Stock.objects.all()
+        # 'qty_product': QuantityProducts.objects.all()
+    }
+    return render(request, 'product_detail_.html', context)
+
+
 def stock(request):
     context = {
         'category': AssortmentCategory.objects.all(),
@@ -32,17 +51,6 @@ def stock(request):
         # 'qty_product': QuantityProducts.objects.all()
     }
     return render(request, 'stock.html', context)
-
-
-# def stock_category_filter(request):
-#     context = {
-#         'category': AssortmentCategory.objects.all(),
-#         'quality_category': AssortmentQualityCategory.objects.all(),
-#         'stock': Stock.objects.filter(category=2)
-#         # 'stock': Stock.objects.all(),
-#         # 'qty_product': QuantityProducts.objects.all()
-#     }
-#     return render(request, 'stock.html', context)
 
 
 def home(request):
@@ -81,20 +89,3 @@ class AddQtyView(DetailView):
     model = Stock
     template_name = 'add_qty.html'
     context_object_name = 'add_qty'
-
-# def add(request):
-#     error = ''
-#     if request.method == 'POST':
-#         form = AddQtyForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('stock')
-#         else:
-#             error = 'Форма неверная'
-#
-#     form = AddQtyForm()
-#     context = {
-#         'form': form,
-#         'error': error
-#     }
-#     return render(request, 'add_qty.html', context)
