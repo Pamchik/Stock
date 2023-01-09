@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_.html' %}
 {% block title %}
     <title>History</title>
 {% endblock %}
@@ -6,84 +6,121 @@
 
 {% block body %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Таблица с данными</title>
-</head>
-<body>
+<!--    <div class="text-center">-->
+<!--        <h2>История движения материалов</h2>-->
+<!--    </div>-->
+<!--      <div class="table-responsive">-->
+<!--        <table class="table table-striped table-sm">-->
+<!--          <thead>-->
+<!--            <tr>-->
+<!--                <th scope="col">name</th>-->
+<!--                <th scope="col">status</th>-->
+<!--                <th scope="col">direction</th>-->
+<!--                <th scope="col">location</th>-->
+<!--                <th scope="col">quality</th>-->
+<!--                <th scope="col">quantity</th>-->
+<!--                <th scope="col">reason</th>-->
+<!--            </tr>-->
+<!--          </thead>-->
 
-<!--<div class="table-responsive"><br><br>-->
-<!--<table class="table table-hover">-->
-<!--  <thead>-->
-<!--    <tr>-->
-<!--        <th scope="col">name</th>-->
-<!--        <th scope="col">status</th>-->
-<!--        <th scope="col">direction</th>-->
-<!--        <th scope="col">location</th>-->
-<!--        <th scope="col">quality</th>-->
-<!--        <th scope="col">quantity</th>-->
-<!--        <th scope="col">reason</th>-->
-<!--    </tr>-->
-<!--  </thead>-->
+<!--          <tbody>-->
+<!--                {% for el in transaction %}-->
+<!--            <tr>-->
+<!--                <th scope="row">{{ el.slug }}</th>-->
+<!--                <td>{{ el.status }}</td>-->
+<!--                <td>{{ el.direction }}</td>-->
+<!--                <td>{{ el.location }}</td>-->
+<!--                <td>{{ el.quality }}</td>-->
+<!--                <td>{{ el.quantity }}</td>-->
+<!--                <td>{{ el.reason }}</td>-->
 
-<!--  <tbody>-->
-<!--        {% for el in transaction %}-->
-<!--    <tr>-->
-<!--        <th scope="row">{{ el.slug }}</th>-->
-<!--        <td>{{ el.status }}</td>-->
-<!--        <td>{{ el.direction }}</td>-->
-<!--        <td>{{ el.location }}</td>-->
-<!--        <td>{{ el.quality }}</td>-->
-<!--        <td>{{ el.quantity }}</td>-->
-<!--        <td>{{ el.reason }}</td>-->
-
-<!--    </tr>-->
-<!--        {% endfor %}-->
-<!--  </tbody>-->
+<!--            </tr>-->
+<!--                {% endfor %}-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </div>-->
 
 
-<!--</table>-->
-<!--</div>-->
+     <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Tables</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Tables</li>
+                        </ol>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+                                .
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                DataTable Example
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                            <td>$320,800</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Garrett Winters</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>63</td>
+                                            <td>2011/07/25</td>
+                                            <td>$170,750</td>
+                                        </tr>
 
-
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-    <div class="text-center">
-        <h2>История движения материалов</h2>
-    </div>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-                <th scope="col">name</th>
-                <th scope="col">status</th>
-                <th scope="col">direction</th>
-                <th scope="col">location</th>
-                <th scope="col">quality</th>
-                <th scope="col">quantity</th>
-                <th scope="col">reason</th>
-            </tr>
-          </thead>
-
-          <tbody>
-                {% for el in transaction %}
-            <tr>
-                <th scope="row">{{ el.slug }}</th>
-                <td>{{ el.status }}</td>
-                <td>{{ el.direction }}</td>
-                <td>{{ el.location }}</td>
-                <td>{{ el.quality }}</td>
-                <td>{{ el.quantity }}</td>
-                <td>{{ el.reason }}</td>
-
-            </tr>
-                {% endfor %}
-          </tbody>
-        </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
       </div>
-    </main>
 
-</body>
-</html>
 
 {% endblock %}

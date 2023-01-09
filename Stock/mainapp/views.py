@@ -56,6 +56,8 @@ def stock(request):
 def home(request):
     return render(request, 'home_page.html')
 
+def index(request):
+    return render(request, 'base_.html')
 
 def history(request):
     context = {
