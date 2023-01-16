@@ -14,11 +14,11 @@ class AssortmentQualityCategoryAdmin(admin.ModelAdmin):
     fields = (("name",),)
 
 
-class StockAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
 
     list_display = ("name",)
     list_display_links = ("name",)
-    list_filter = ("category", "location")
+    list_filter = ("category",)
     search_fields = ("name", "category__name")
     save_on_top = True
     fieldsets = (
@@ -26,9 +26,9 @@ class StockAdmin(admin.ModelAdmin):
         ("General information", {
             # "classes": ("collapse",),
             "fields": (("category",),
-                       ("location", "place"),
                        ("name",),
                        ("description",),
+                       ("comment",),
                        ("image",)
                        )
         }),
@@ -36,7 +36,7 @@ class StockAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-admin.site.register(Stock, StockAdmin)
+admin.site.register(Product, ProductAdmin)
 admin.site.register(AssortmentCategory, AssortmentCategoryAdmin)
 admin.site.register(Location, LocationAdmin)
 admin.site.register(AssortmentQualityCategory, AssortmentQualityCategoryAdmin)

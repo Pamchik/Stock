@@ -41,14 +41,13 @@ class AssortmentQualityCategory(models.Model):
         verbose_name_plural = 'Quality of categories'
 
 
-class Stock(models.Model):
+class Product(models.Model):
     category = models.ForeignKey(AssortmentCategory, verbose_name="Категория", on_delete=models.CASCADE, null=True)
-    location = models.ForeignKey(Location, verbose_name="Место хранения", on_delete=models.CASCADE, null=False)
-    place = models.CharField(max_length=255, verbose_name="Точное место", null=True, blank=True)
     name = models.CharField(max_length=255, verbose_name="Название", null=False)
     description = models.TextField(max_length=2000, verbose_name="Описание", null=True, blank=True)
     slug = AutoSlugField(populate_from='name', editable=True, always_update=True)
     image = models.ImageField(verbose_name="Фотография", upload_to='photos_parts', default='default.jpg')
+    comment = models.TextField(max_length=2000, verbose_name="Описание", null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -57,8 +56,8 @@ class Stock(models.Model):
         return f'/stock/{self.slug}'
 
     class Meta:
-        verbose_name = 'Stock'
-        verbose_name_plural = 'Stock'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Product'
 
 
 class Direction(models.Model):
@@ -76,8 +75,8 @@ class Status(models.Model):
 
 
 class Transaction(models.Model):
-    name = models.ForeignKey(Stock, verbose_name="Название", on_delete=models.CASCADE, null=False)
-    status = models.ForeignKey(Status, verbose_name="Название", on_delete=models.CASCADE, null=False)
+    name = models.ForeignKey(Product, verbose_name="Название", on_delete=models.CASCADE, null=False)
+    status = models.ForeignKey(Status, verbose_name="Статус", on_delete=models.CASCADE, null=False)
     direction = models.ForeignKey(Direction, verbose_name="Откуда/Куда", on_delete=models.CASCADE, null=False)
     location = models.ForeignKey(Location, verbose_name="Перемещение (место)", on_delete=models.CASCADE, null=False)
     quality = models.ForeignKey(AssortmentQualityCategory, verbose_name="Качество продукции", on_delete=models.CASCADE, null=False)
@@ -86,4 +85,5 @@ class Transaction(models.Model):
     slug = AutoSlugField(populate_from='name', editable=False, always_update=True)
 
     def __str__(self):
-        return self.slug
+        return self.name
+

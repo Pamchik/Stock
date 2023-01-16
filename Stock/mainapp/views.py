@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from .forms import StockForm, AddQtyForm
-from django.views.generic import DetailView, UpdateView, DeleteView
+from .forms import ProductForm, AddQtyForm, WriteOffQtyForm, MoveQtyFromForm, MoveQtyToForm
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
+
+
 
 
 class ProductDetailView(DetailView):
-    model = Stock
+    model = Product
     template_name = 'product_detail.html'
     context_object_name = 'product'
 
@@ -20,14 +22,14 @@ class ProductDetailView(DetailView):
 
 
 class ProductUpdateView(UpdateView):
-    model = Stock
+    model = Product
     template_name = 'update_product.html'
-    form_class = StockForm
+    form_class = ProductForm
     context_object_name = 'product'
 
 
 class ProductDeleteView(DeleteView):
-    model = Stock
+    model = Product
     success_url = '/stock/'
     template_name = 'delete_product.html'
     context_object_name = 'product'
@@ -37,7 +39,7 @@ def product_filter(request):
     context = {
         'category': AssortmentCategory.objects.all(),
         'quality_category': AssortmentQualityCategory.objects.all(),
-        'stock': Stock.objects.all()
+        'stock': Product.objects.all()
         # 'qty_product': QuantityProducts.objects.all()
     }
     return render(request, 'product_detail_.html', context)
@@ -47,7 +49,7 @@ def stock(request):
     context = {
         'category': AssortmentCategory.objects.all(),
         'quality_category': AssortmentQualityCategory.objects.all(),
-        'stock': Stock.objects.all()
+        'stock': Product.objects.all()
         # 'qty_product': QuantityProducts.objects.all()
     }
     return render(request, 'stock.html', context)
@@ -56,38 +58,90 @@ def stock(request):
 def home(request):
     return render(request, 'home_page.html')
 
+
 def index(request):
-    return render(request, 'base_.html')
+    return render(request, 'bootstrap4.html')
+
 
 def history(request):
     context = {
         'transaction': Transaction.objects.all(),
         'quality_category': AssortmentQualityCategory.objects.all(),
-        'stock': Stock.objects.all(),
+        'stock': Product.objects.all(),
         # 'qty_product': QuantityProducts.objects.all()
     }
     return render(request, 'history.html', context)
 
 
-def create(request):
-    error = ''
-    if request.method == 'POST':
-        form = StockForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('stock')
-        else:
-            error = 'Форма неверная'
+class ProductCreateView(CreateView):
+    model = Product
+    template_name = 'create_product.html'
+    form_class = ProductForm
+    context_object_name = 'create_product'
 
-    form = StockForm()
-    context = {
-        'form': form,
-        'error': error
-    }
-    return render(request, 'create_product.html', context)
+    def get_success_url(self):
+        return f'/stock/{self.object.slug}/add'
 
 
-class AddQtyView(DetailView):
-    model = Stock
+class AddQtyView(CreateView):
+    model = Transaction
     template_name = 'add_qty.html'
+    form_class = AddQtyForm
     context_object_name = 'add_qty'
+
+    def get_initial(self):
+        name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
+        return {
+            'name': name
+        }
+
+    def get_success_url(self):
+        return f'/stock/{self.object.name.slug}'
+
+
+class WriteOffQtyView(CreateView):
+    model = Transaction
+    template_name = 'write-off_qty.html'
+    form_class = WriteOffQtyForm
+    context_object_name = 'write-off_qty'
+
+    def get_initial(self):
+        name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
+        return {
+            'name': name
+        }
+
+    def get_success_url(self):
+        return f'/stock/{self.object.name.slug}'
+
+
+class MoveQtyFromView(CreateView):
+    model = Transaction
+    template_name = 'move_from_qty.html'
+    form_class = MoveQtyFromForm
+    context_object_name = 'move_from_qty'
+
+    def get_initial(self):
+        name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
+        return {
+            'name': name
+        }
+
+    def get_success_url(self):
+        return f'/stock/{self.object.name.slug}/move-to/'
+
+
+class MoveQtyToView(CreateView):
+    model = Transaction
+    template_name = 'move_to_qty.html'
+    form_class = MoveQtyToForm
+    context_object_name = 'move_to_qty'
+
+    def get_initial(self):
+        name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
+        return {
+            'name': name
+        }
+
+    def get_success_url(self):
+        return f'/stock/{self.object.name.slug}'

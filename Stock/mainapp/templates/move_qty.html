@@ -1,0 +1,129 @@
+{% extends 'base_.html' %}
+{% block title %}
+<title>Move</title>
+{% endblock %}
+
+{% block body %}
+<div id="layoutSidenav_content">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-1 rounded-lg mt-3">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">Перемещение</h3>
+                    </div>
+                    <div class="card-body" style="display: block;">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-center">Откуда</h5>
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="card-body" style="display: block;">
+                                        <div class="form-group">
+                                            {{ form.name }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="inputStatus">
+                                                {{ form.status }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="inputDirection">
+                                                {{ form.direction }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputLocation">*Локация</label>
+                                            <div id="inputLocation">
+                                                {{ form.location }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputQuality">*Качество</label>
+                                            <div id="inputQuality">
+                                                {{ form.quality }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputQuantity">*Количество</label>
+                                            <div id="inputQuantity">
+                                                {{ form.quantity }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputReason">*Причина</label>
+                                            <div id="inputReason">
+                                                {{ form.reason }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-danger">*Обязательное поле для заполнения</p>
+                                    <button type="submit" class="btn btn-primary btn-block">Переместить</button>
+
+                                    <span>{{ error }}</span>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <h5 class="card-title text-center">Куда</h5>
+                                <form method="post" enctype="multipart/form-data">
+                                    <div class="card-body" style="display: block;">
+                                        <div class="form-group">
+                                            {{ form.name }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="inputStatus">
+                                                {{ form.status }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="inputDirection">
+                                                {{ form.direction }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputLocation">*Локация</label>
+                                            <div id="inputLocation">
+                                                {{ form.location }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputQuality">*Качество</label>
+                                            <div id="inputQuality">
+                                                {{ form.quality }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputQuantity">*Количество</label>
+                                            <div id="inputQuantity">
+                                                {{ form.quantity }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputReason">*Причина</label>
+                                            <div id="inputReason">
+                                                {{ form.reason }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <span>{{ error }}</span>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+<!--                            <a class="btn btn-secondary" href="{% url 'product-detail' product.slug %}" role="button">Назад</a>-->

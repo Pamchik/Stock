@@ -1,61 +1,63 @@
 {% extends 'base_.html' %}
 {% block title %}
-    <title>Update</title>
+<title>Update</title>
 {% endblock %}
 
 {% block body %}
 <div id="layoutSidenav_content">
 
-<div class="container">
-  <div class="card-deck mb-3 text-start">
-    <h1 class="card-deck mb-3 text-center">Обновить данные по продукту</h1><br>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-      <div class="form-group row">
-        <label class="col-sm col-form-label">Выберите категорию</label>
-        <div class="col-sm-9">
-          {{ form.category }}
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm col-form-label">Выберите место хранения</label>
-        <div class="col-sm-9">
-          {{ form.location }}
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm col-form-label">Введите точное место хранения</label>
-        <div class="col-sm-9">
-          {{ form.place }}
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm col-form-label">Введите название</label>
-        <div class="col-sm-9">
-          {{ form.name }}
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm col-form-label">Введите описание</label>
-        <div class="col-sm-9">
-          {{ form.description }}<br>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm col-form-label">Выберите изображение</label>
-        <div class="col-sm-9">
-          {{ form.image }}
-        </div>
-      </div>
-            <p class="text-danger">*Обязательное поле для заполнения</p>
-        <button type="submit" class="btn btn-success">Обновить</button>
-        <a class="btn btn-primary" href="{% url 'product-detail' product.slug %}" role="button">Link</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-1 rounded-lg mt-3">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">Обновление данных по продукту</h3>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="card-body" style="display: block;">
+                            <div class="form-group">
+                                <label for="inputCategory">*Категория</label>
+                                <div id="inputCategory">
+                                    {{ form.category }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName">*Название</label>
+                                <div id="inputName">
+                                    {{ form.name }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDescription">Описание</label>
+                                <div id="inputDescription">
+                                    {{ form.description }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputComment">Комментарий</label>
+                                <div id="inputComment">
+                                    {{ form.comment }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPhoto">Фотография</label>
+                                <div id="inputPhoto">
+                                    {{ form.image }}
+                                </div>
+                            </div>
+                            <p class="text-danger">*Обязательное поле для заполнения</p>
+                            <button type="submit" class="btn btn-primary btn-block">Обновить</button>
+                            <a class="btn btn-secondary" href="{% url 'product-detail' product.slug %}" role="button">Назад</a>
 
-        <span>{{ error }}</span>
-    </form>
+                            <span>{{ error }}</span>
+                        </div>
+                    </form>
+                </div>
 
-  </div>
-</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
