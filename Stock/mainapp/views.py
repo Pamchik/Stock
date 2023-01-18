@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import ProductForm, AddQtyForm, WriteOffQtyForm, MoveQtyFromForm, MoveQtyToForm
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
+from django.db.models import Q, Sum
 
 
-
+def index(request):
+    return render(request, 'tables.html')
 
 class ProductDetailView(DetailView):
     model = Product
@@ -17,9 +19,24 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['quality'] = AssortmentQualityCategory.objects.all()
         context['location'] = Location.objects.all()
-        context['transaction'] = Transaction.objects.filter(slug=name)
-        return context
+        context['transaction'] = Transaction.objects.filter(slug=name).order_by("-id")
 
+        # query = Q(slug=name)
+        # #query.add(Q(email='mark@test.com'), Q.OR)
+        # query.add(Q(quality=1), Q.AND)
+        context['transaction_1_1'] = Transaction.objects.filter(Q(slug=name) & Q(quality=1) & Q(location=1)).aggregate(Sum('quantity'))
+        context['transaction_1_2'] = Transaction.objects.filter(Q(slug=name) & Q(quality=2) & Q(location=1)).aggregate(Sum('quantity'))
+        context['transaction_1_3'] = Transaction.objects.filter(Q(slug=name) & Q(quality=3) & Q(location=1)).aggregate(Sum('quantity'))
+        context['transaction_2_1'] = Transaction.objects.filter(Q(slug=name) & Q(quality=1) & Q(location=2)).aggregate(Sum('quantity'))
+        context['transaction_2_2'] = Transaction.objects.filter(Q(slug=name) & Q(quality=2) & Q(location=2)).aggregate(Sum('quantity'))
+        context['transaction_2_3'] = Transaction.objects.filter(Q(slug=name) & Q(quality=3) & Q(location=2)).aggregate(Sum('quantity'))
+        context['transaction_sum_1'] = Transaction.objects.filter(Q(slug=name) & Q(quality=1)).aggregate(Sum('quantity'))
+        context['transaction_sum_2'] = Transaction.objects.filter(Q(slug=name) & Q(quality=2)).aggregate(Sum('quantity'))
+        context['transaction_sum_3'] = Transaction.objects.filter(Q(slug=name) & Q(quality=3)).aggregate(Sum('quantity'))
+
+        # print(context['transaction_sum_1'])
+
+        return context
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -57,10 +74,6 @@ def stock(request):
 
 def home(request):
     return render(request, 'home_page.html')
-
-
-def index(request):
-    return render(request, 'bootstrap4.html')
 
 
 def history(request):

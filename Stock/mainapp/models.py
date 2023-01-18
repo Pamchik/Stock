@@ -1,6 +1,7 @@
 from django.db import models
 from autoslug import AutoSlugField
 from django.urls import reverse
+from datetime import date
 
 
 class AssortmentCategory(models.Model):
@@ -83,6 +84,7 @@ class Transaction(models.Model):
     quantity = models.DecimalField(max_digits=9, decimal_places=0, verbose_name="Количество", null=False, default=0)
     reason = models.TextField(max_length=2000, verbose_name="Причина перемещения", null=False)
     slug = AutoSlugField(populate_from='name', editable=False, always_update=True)
+    date = models.DateField(verbose_name="Дата", auto_now_add=True)
 
     def __str__(self):
         return self.name

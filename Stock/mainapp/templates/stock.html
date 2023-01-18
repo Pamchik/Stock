@@ -88,23 +88,39 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                          {% for el in quality_category %}
-                                            <th scope="col">{{ el.name }}</th>
-                                          {% endfor %}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                          <td>1</td>
-                                          <td>8</td>
-                                          <td>2</td>
-                                          <td>15</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-sm">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                {% for el in quality %}
+                                                <th scope="col">{{ el.name }}</th>
+                                                {% endfor %}
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">Warehouse</th>
+                                                <td>{{ transaction_1_1.quantity__sum }}</td>
+                                                <td>{{ transaction_1_3.quantity__sum }}</td>
+                                                <td>{{ transaction_1_3.quantity__sum }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Office</th>
+                                                <td>{{ transaction_2_1.quantity__sum }}</td>
+                                                <td>{{ transaction_2_3.quantity__sum }}</td>
+                                                <td>{{ transaction_2_3.quantity__sum }}</td>
+                                            </tr>
+
+                                            <th scope="row" class="table-warning">Total</th>
+                                            <td class="table-warning">{{ transaction_sum_1.quantity__sum }}</td>
+                                            <td class="table-warning">{{ transaction_sum_2.quantity__sum }}</td>
+                                            <td class="table-warning">{{ transaction_sum_3.quantity__sum }}</td>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

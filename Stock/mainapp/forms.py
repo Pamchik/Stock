@@ -1,6 +1,7 @@
 from .models import Product, Transaction, Status, Direction
 from django import forms
-from django.forms import ModelForm, TextInput, Select, Textarea, FileInput
+from django.forms import ModelForm, TextInput, Select, Textarea, ClearableFileInput
+
 
 class ProductForm(ModelForm):
 
@@ -23,7 +24,7 @@ class ProductForm(ModelForm):
                 'class': 'form-control',
                 'rows': '3'
             }),
-            'image': FileInput(attrs={
+            'image': ClearableFileInput(attrs={
                 'class': 'form-control'
             })
         }
