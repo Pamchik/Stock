@@ -53,6 +53,7 @@
                         <div class="col-6">
                             <div class="text-start">
                                 <h4><a class="fw-bolder" href="{% url 'product-detail' el.slug %}">{{ el.name }}</a></h4>
+<!--                                href="/stock/{{stock.slug}}/-->
                             </div>
                             <div class="text-start">
                                 <span>Описание: {{ el.description }}</span>
@@ -62,15 +63,16 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="d-flex justify-content-center">
-<!--                                        <div class="btn-group">-->
+                                        <div class="btn-group">
 
-<!--                                             <a class="btn btn-success"-->
-<!--                                               href="#" role="button">-->
-<!--                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">-->
-<!--                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>-->
-<!--                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>-->
-<!--                                                </svg>-->
-<!--                                            </a>-->
+                                             <a class="btn btn-success"
+                                               href="/stock/{{stock.slug}}/update/" role="button">
+                                                 {% url 'product-detail' el.slug %}
+                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                </svg>
+                                            </a>
 <!--                                            <button type="button" class="btn btn-warning">-->
 <!--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">-->
 <!--                                                    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>-->
@@ -84,7 +86,7 @@
 <!--                                                </svg>-->
 <!--                                                <span class="visually-hidden">Button</span>-->
 <!--                                            </button>-->
-<!--                                        </div>-->
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -102,21 +104,21 @@
                                             <tbody>
                                             <tr>
                                                 <th scope="row">Warehouse</th>
-                                                <td>{{ transaction_1_1.quantity__sum }}</td>
-                                                <td>{{ transaction_1_3.quantity__sum }}</td>
-                                                <td>{{ transaction_1_3.quantity__sum }}</td>
+<!--                                                <td>{{ transaction_1_1.quantity__sum }}</td>-->
+<!--                                                <td>{{ transaction_1_3.quantity__sum }}</td>-->
+<!--                                                <td>{{ transaction_1_3.quantity__sum }}</td>-->
                                             </tr>
                                             <tr>
                                                 <th scope="row">Office</th>
-                                                <td>{{ transaction_2_1.quantity__sum }}</td>
-                                                <td>{{ transaction_2_3.quantity__sum }}</td>
-                                                <td>{{ transaction_2_3.quantity__sum }}</td>
+<!--                                                <td>{{ transaction_2_1.quantity__sum }}</td>-->
+<!--                                                <td>{{ transaction_2_3.quantity__sum }}</td>-->
+<!--                                                <td>{{ transaction_2_3.quantity__sum }}</td>-->
                                             </tr>
 
                                             <th scope="row" class="table-warning">Total</th>
-                                            <td class="table-warning">{{ transaction_sum_1.quantity__sum }}</td>
-                                            <td class="table-warning">{{ transaction_sum_2.quantity__sum }}</td>
-                                            <td class="table-warning">{{ transaction_sum_3.quantity__sum }}</td>
+<!--                                            <td class="table-warning">{{ transaction_sum_1.quantity__sum }}</td>-->
+<!--                                            <td class="table-warning">{{ transaction_sum_2.quantity__sum }}</td>-->
+<!--                                            <td class="table-warning">{{ transaction_sum_3.quantity__sum }}</td>-->
 
                                             </tbody>
                                         </table>
