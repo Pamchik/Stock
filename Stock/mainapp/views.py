@@ -158,3 +158,37 @@ class MoveQtyToView(CreateView):
 
     def get_success_url(self):
         return f'/stock/{self.object.name.slug}'
+
+
+def MoveQtyView(request):
+    if request.method == 'POST':
+        form1 = MoveQtyFromForm(request.POST, prefix="form1")
+        form2 = MoveQtyToForm(request.POST, prefix="form2")
+
+
+        if form1.is_valid() and form2.is_valid():
+            qty_from = form1.save(commit=False)
+            qty_from.save()
+            qty_to = form2.save(commit=False)
+
+            #name = form2.cleaned_data['name']
+            quantity = form2.cleaned_data['quantity']
+            reason = form2.cleaned_data['reason']
+
+            #qty_to.name = Product.name(request.POST['form1-name'])
+            qty_to.quantity = request.POST['form1-quantity']
+            qty_to.reason = request.POST['form1-reason']
+
+            qty_to.save()
+            print(request.POST)
+            return redirect('stock')
+    else:
+        form1 = MoveQtyFromForm(prefix="form1")
+        form2 = MoveQtyToForm(prefix="form2")
+
+    return render(request, 'move_qty.html', {
+        'form1': form1, 'form2': form2,
+    })
+
+
+
