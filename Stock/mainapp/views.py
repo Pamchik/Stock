@@ -160,10 +160,49 @@ class MoveQtyToView(CreateView):
         return f'/stock/{self.object.name.slug}'
 
 
-def MoveQtyView(request):
+# def MoveQtyView(request):
+#     if request.method == 'POST':
+#         form1 = MoveQtyFromForm(request.POST, prefix="form1")
+#         form2 = MoveQtyToForm(request.POST, prefix="form2")
+#
+#
+#         if form1.is_valid() and form2.is_valid():
+#             qty_from = form1.save(commit=False)
+#             qty_from.save()
+#             qty_to = form2.save(commit=False)
+#
+#             #name = form2.cleaned_data['name']
+#             quantity = form2.cleaned_data['quantity']
+#             reason = form2.cleaned_data['reason']
+#
+#             #qty_to.name = Product.name(request.POST['form1-name'])
+#             qty_to.quantity = request.POST['form1-quantity']
+#             qty_to.reason = request.POST['form1-reason']
+#
+#             qty_to.save()
+#             # print(request.POST)
+#             return redirect('stock')
+#
+#     else:
+#         form1 = MoveQtyFromForm(prefix="form1")
+#         form2 = MoveQtyToForm(prefix="form2")
+#
+#     return render(request, 'move_qty.html', {
+#         'form1': form1, 'form2': form2,
+#     })
+
+def MoveQtyView(request, slug):
+    name = get_object_or_404(Product, slug=slug)
+    # initial_data = {'name': name}
+    # def get_initial(self):
+    #     name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
+    #     return {
+    #         'name': name
+    #     }
+
     if request.method == 'POST':
-        form1 = MoveQtyFromForm(request.POST, prefix="form1")
-        form2 = MoveQtyToForm(request.POST, prefix="form2")
+        form1 = MoveQtyFromForm(request.POST, prefix="form1", initial={'name': name})
+        form2 = MoveQtyToForm(request.POST, prefix="form2", initial={'name': name})
 
 
         if form1.is_valid() and form2.is_valid():
@@ -180,15 +219,28 @@ def MoveQtyView(request):
             qty_to.reason = request.POST['form1-reason']
 
             qty_to.save()
-            print(request.POST)
+            # print(request.POST)
             return redirect('stock')
+
     else:
-        form1 = MoveQtyFromForm(prefix="form1")
-        form2 = MoveQtyToForm(prefix="form2")
+        form1 = MoveQtyFromForm(prefix="form1", initial={'name': name})
+        form2 = MoveQtyToForm(prefix="form2", initial={'name': name})
 
     return render(request, 'move_qty.html', {
-        'form1': form1, 'form2': form2,
+        'form1': form1, 'form2': form2, 'name': name
     })
 
-
+# def NewEntryView(request,slug):
+#     UserPresent=get_object_or_404(DiaryUser,Username=slug)
+#     if request.method=='POST':
+#         form=MakeADiaryForm(request.POST, instance=UserPresent) # You have to define the instance you want to edit othervise it tries to create a new one. Most probobly this was your issue
+#         if form.is_valid():
+#             BlogEntry=form.save(commit=False)
+#             BlogEntry.DiaryUser=slug
+#             BlogEntry.save()
+#             return redirect('Display',**{'slug':BlogEntry.DiaryUer})
+#     else:
+#         form=MakeADiaryForm()
+#
+#     return render(request,'Mobile/AddNewEntry.html',{'form':form,'slug':slug}) # here
 

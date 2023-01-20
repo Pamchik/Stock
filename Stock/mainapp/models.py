@@ -89,3 +89,5 @@ class Transaction(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return f'/stock/{self.slug}'
