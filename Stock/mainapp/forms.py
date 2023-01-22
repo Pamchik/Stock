@@ -63,10 +63,12 @@ class AddQtyForm(ModelForm):
             'quantity': TextInput(attrs={
                 'class': 'form-control',
                 'autocomplete': 'off',
-                'pattern': '[0-9]+'
+                'pattern': '[0-9]+',
+                'placeholder': "Введите целое число"
             }),
             'reason': Textarea(attrs={
             'class': 'form-control',
+            'placeholder': "Опишите причину изменения количества (например: новая поставка)",
             'rows': '3'
             }),
 
@@ -108,10 +110,12 @@ class WriteOffQtyForm(ModelForm):
             'quantity': TextInput(attrs={
                 'class': 'form-control',
                 'autocomplete': 'off',
-                'pattern': '[0-9]+'
+                'pattern': '[0-9]+',
+                'placeholder': "Введите целое число"
             }),
             'reason': Textarea(attrs={
             'class': 'form-control',
+            'placeholder': "Опишите причину изменения количества (например: Продажа клиенту)",
             'rows': '3'
             }),
         }
@@ -128,11 +132,11 @@ class WriteOffQtyForm(ModelForm):
 class MoveQtyFromForm(ModelForm):
 
     status = forms.ModelChoiceField(queryset=Transaction.objects.all(), widget=forms.TextInput(attrs={
-            # 'style': 'display:none'
+            'style': 'display:none'
         }), initial=2)
 
     direction = forms.ModelChoiceField(queryset=Transaction.objects.all(), widget=forms.TextInput(attrs={
-            # 'style': 'display:none'
+            'style': 'display:none'
         }), initial=2)
 
 
@@ -147,26 +151,28 @@ class MoveQtyFromForm(ModelForm):
         model = Transaction
         fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
-        # widgets = {
-        #     'name': Select(attrs={
-        #         'style': 'display:none'
-        #     }),
-        #     'location': Select(attrs={
-        #         'class': 'form-control'
-        #     }),
-        #     'quality': Select(attrs={
-        #         'class': 'form-control'
-        #     }),
-        #     'quantity': TextInput(attrs={
-        #         'class': 'form-control',
-        #         'autocomplete': 'off',
-        #         'pattern': '[0-9]+'
-        #     }),
-        #     'reason': Textarea(attrs={
-        #     'class': 'form-control',
-        #     'rows': '3'
-        #     }),
-        # }
+        widgets = {
+            'name': Select(attrs={
+                'style': 'display:none'
+            }),
+            'location': Select(attrs={
+                'class': 'form-control'
+            }),
+            'quality': Select(attrs={
+                'class': 'form-control'
+            }),
+            'quantity': TextInput(attrs={
+                'class': 'form-control',
+                'autocomplete': 'off',
+                'pattern': '[0-9]+',
+                'placeholder': "Введите целое число"
+            }),
+            'reason': Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': "Опишите причину изменения количества (например: Перемещение в офис)",
+            'rows': '3'
+            }),
+        }
 
 
     def clean_quantity(self):
@@ -183,15 +189,19 @@ class MoveQtyToForm(ModelForm):
     # }), required=False)
 
     status = forms.ModelChoiceField(queryset=Transaction.objects.all(), widget=forms.TextInput(attrs={
-        # 'style': 'display:none'
+        'style': 'display:none'
     }), initial=2)
 
     direction = forms.ModelChoiceField(queryset=Transaction.objects.all(), widget=forms.TextInput(attrs={
-        # 'style': 'display:none'
+        'style': 'display:none'
     }), initial=1)
 
+    quantity = forms.ModelChoiceField(queryset=Transaction.objects.all(), widget=forms.TextInput(attrs={
+        'style': 'display:none'
+    }), required=False)
+
     reason = CharField(widget = forms.Textarea(attrs={
-        # 'style': 'display:none'
+        'style': 'display:none'
     }), required=False)
 
 
@@ -205,23 +215,14 @@ class MoveQtyToForm(ModelForm):
         model = Transaction
         fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
-        # widgets = {
-        #     'name': Select(attrs={
-        #         'style': 'display:none'
-        #     }),
-        #     'location': Select(attrs={
-        #         'class': 'form-control'
-        #     }),
-        #     'quality': Select(attrs={
-        #         'class': 'form-control'
-        #     }),
-        #     'quantity': TextInput(attrs={
-        #         'class': 'form-control',
-        #         'autocomplete': 'off',
-        #         'pattern': '[0-9]+'
-        #     }),
-        #     'reason': Textarea(attrs={
-        #         'class': 'form-control',
-        #         'rows': '3'
-        #     }),
-        # }
+        widgets = {
+            'name': Select(attrs={
+                'style': 'display:none'
+            }),
+            'location': Select(attrs={
+                'class': 'form-control'
+            }),
+            'quality': Select(attrs={
+                'class': 'form-control'
+            })
+        }

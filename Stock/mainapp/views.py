@@ -8,6 +8,67 @@ from django.db.models import Q, Sum
 def index(request):
     return render(request, 'tables.html')
 
+# def test(request):
+#     return render(request, 'test.html')
+
+def test(request):
+    quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
+    location_list = [p.name for p in Location.objects.all()]
+    quantity_dict = [[p.name, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
+    quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
+    product_list = [p.name for p in Product.objects.all()]
+    print(list_value_product(
+            product_list,
+            location_list,
+            quality_list,
+            quantity_list
+        ))
+    context = {
+        'total_table': list_value_product(
+            product_list,
+            location_list,
+            quality_list,
+            quantity_list,
+
+        ),
+        'category': AssortmentCategory.objects.all(),
+        'quality': AssortmentQualityCategory.objects.all(),
+        'stock': Product.objects.all(),
+    }
+    return render(request, 'test.html', context)
+
+def list_value_product(product_list, location_list, quality_list, quantity_list):
+    list_value = []
+    i = 0
+    for i_product in product_list:
+        list_value_lvl1 = []
+        for i_location in location_list:
+            list_value_lvl2 = []
+            for i_quality in quality_list:
+                sum = 0
+                for i_quantity in quantity_list:
+                    if i_quantity[0] == i_product and i_quantity[1] == i_location and i_quantity[2] == i_quality:
+                        sum += int(i_quantity[3])
+                list_value_lvl2.append(sum)
+            list_value_lvl1.append([i_location, list_value_lvl2])
+        list_value.append([i_product, list_value_lvl1])
+        i += 1
+
+    # list_value_total = []
+    # i = 0
+    # for i_product in product_list:
+    #     list_value_lvl1 = []
+    #     for i_quality in quality_list:
+    #         sum = 0
+    #         for i_quantity in quantity_list:
+    #             if i_quantity[1] == i_quality:
+    #                 sum += int(i_quantity[2])
+    #         list_value_lvl1.append(sum)
+    #     list_value_total.append([i_product, description_list[i], slug_list[i], list_value_lvl1])
+    #     i += 1
+    # print(list_value)
+    return list_value
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'product_detail.html'
@@ -21,22 +82,44 @@ class ProductDetailView(DetailView):
         context['location'] = Location.objects.all()
         context['transaction'] = Transaction.objects.filter(slug=name).order_by("-id")
 
-        # query = Q(slug=name)
+        quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
+        location_list = [p.name for p in Location.objects.all()]
+        quantity_dict = [[p.location, p.quality, p.quantity] for p in Transaction.objects.filter(slug=name)]
+        quantity_list = [(str(i[0]), str(i[1]), int(i[2])) for i in quantity_dict]
+
+        context['sum_location_quality'] = list_value(location_list, quality_list, quantity_list, **kwargs)
+        context['sum_total'] = list_value_total(quality_list, quantity_list, **kwargs)
         # #query.add(Q(email='mark@test.com'), Q.OR)
         # query.add(Q(quality=1), Q.AND)
-        context['transaction_1_1'] = Transaction.objects.filter(Q(slug=name) & Q(quality=1) & Q(location=1)).aggregate(Sum('quantity'))
-        context['transaction_1_2'] = Transaction.objects.filter(Q(slug=name) & Q(quality=2) & Q(location=1)).aggregate(Sum('quantity'))
-        context['transaction_1_3'] = Transaction.objects.filter(Q(slug=name) & Q(quality=3) & Q(location=1)).aggregate(Sum('quantity'))
-        context['transaction_2_1'] = Transaction.objects.filter(Q(slug=name) & Q(quality=1) & Q(location=2)).aggregate(Sum('quantity'))
-        context['transaction_2_2'] = Transaction.objects.filter(Q(slug=name) & Q(quality=2) & Q(location=2)).aggregate(Sum('quantity'))
-        context['transaction_2_3'] = Transaction.objects.filter(Q(slug=name) & Q(quality=3) & Q(location=2)).aggregate(Sum('quantity'))
-        context['transaction_sum_1'] = Transaction.objects.filter(Q(slug=name) & Q(quality=1)).aggregate(Sum('quantity'))
-        context['transaction_sum_2'] = Transaction.objects.filter(Q(slug=name) & Q(quality=2)).aggregate(Sum('quantity'))
-        context['transaction_sum_3'] = Transaction.objects.filter(Q(slug=name) & Q(quality=3)).aggregate(Sum('quantity'))
-
-        # print(context['transaction_sum_1'])
+        # context['transaction_1_1'] = Transaction.objects.filter(Q(slug=name) & Q(quality=1) & Q(location=1)).aggregate(Sum('quantity'))
 
         return context
+
+
+def list_value(location_list, quality_list, quantity_list, **kwargs):
+    list_value = []
+    for i_location in location_list:
+        list_value_lvl2 = []
+        for i_quality in quality_list:
+            sum = 0
+            for i_quantity in quantity_list:
+                if i_quantity[0] == i_location and i_quantity[1] == i_quality:
+                    sum += int(i_quantity[2])
+            list_value_lvl2.append(sum)
+        list_value.append([i_location, list_value_lvl2])
+    return list_value
+
+
+def list_value_total(quality_list, quantity_list, **kwargs):
+    list_value_total = []
+    for i_quality in quality_list:
+        sum_total = 0
+        for i_quantity in quantity_list:
+            if i_quantity[1] == i_quality:
+                sum_total += int(i_quantity[2])
+        list_value_total.append(sum_total)
+    return list_value_total
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -63,13 +146,29 @@ def product_filter(request):
 
 
 def stock(request):
+
+
+    quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
+    location_list = [p.name for p in Location.objects.all()]
+    quantity_dict = [[p.name, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
+    quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
+    product_list = [p.name for p in Product.objects.all()]
+
     context = {
+        'total_table': list_value_product(
+            product_list,
+            location_list,
+            quality_list,
+            quantity_list,
+
+        ),
         'category': AssortmentCategory.objects.all(),
-        'quality_category': AssortmentQualityCategory.objects.all(),
-        'stock': Product.objects.all()
-        # 'qty_product': QuantityProducts.objects.all()
+        'quality': AssortmentQualityCategory.objects.all(),
+        'stock': Product.objects.all(),
     }
+
     return render(request, 'stock.html', context)
+
 
 
 def home(request):
@@ -97,10 +196,10 @@ class ProductCreateView(CreateView):
 
 
 class AddQtyView(CreateView):
-    model = Transaction
+    model = Product
     template_name = 'add_qty.html'
     form_class = AddQtyForm
-    context_object_name = 'add_qty'
+    context_object_name = 'product'
 
     def get_initial(self):
         name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
@@ -187,18 +286,12 @@ class MoveQtyToView(CreateView):
 #         form1 = MoveQtyFromForm(prefix="form1")
 #         form2 = MoveQtyToForm(prefix="form2")
 #
-#     return render(request, 'move_qty.html', {
+#     return render(request, 'move_qty_old.html', {
 #         'form1': form1, 'form2': form2,
 #     })
 
 def MoveQtyView(request, slug):
     name = get_object_or_404(Product, slug=slug)
-    # initial_data = {'name': name}
-    # def get_initial(self):
-    #     name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
-    #     return {
-    #         'name': name
-    #     }
 
     if request.method == 'POST':
         form1 = MoveQtyFromForm(request.POST, prefix="form1", initial={'name': name})
@@ -211,8 +304,8 @@ def MoveQtyView(request, slug):
             qty_to = form2.save(commit=False)
 
             #name = form2.cleaned_data['name']
-            quantity = form2.cleaned_data['quantity']
-            reason = form2.cleaned_data['reason']
+            # quantity = form2.cleaned_data['quantity']
+            # reason = form2.cleaned_data['reason']
 
             #qty_to.name = Product.name(request.POST['form1-name'])
             qty_to.quantity = request.POST['form1-quantity']
@@ -243,4 +336,6 @@ def MoveQtyView(request, slug):
 #         form=MakeADiaryForm()
 #
 #     return render(request,'Mobile/AddNewEntry.html',{'form':form,'slug':slug}) # here
+
+
 

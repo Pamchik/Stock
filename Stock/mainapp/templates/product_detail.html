@@ -6,8 +6,8 @@
 <div id="layoutSidenav_content">
     <div class="container"><br>
         <div class="row">
-            <div class="col">
-                <div class="card">
+            <div class="card card-primary mt-3">
+<!--                <div class="card">-->
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-5 align-self-center">
@@ -17,7 +17,7 @@
                                 <div class="single-pro-detail">
 
                                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-                                        <h1 class="h3">{{ product.name }}</h1>
+                                        <h1 class="h3 text-primary">{{ product.name }}</h1>
                                         <div class="btn-group" role="group"
                                              aria-label="Button group with nested dropdown">
                                             <div class="btn-group" role="group">
@@ -75,7 +75,7 @@
                                                     </li>
                                                     <li>
                                                         <a class="dropdown-item"
-                                                           href="{% url 'move-from-qty' product.slug %}" role="button">
+                                                           href="{% url 'move-qty' product.slug %}" role="button">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                  height="16" fill="currentColor"
                                                                  class="bi bi-arrow-left-right" viewBox="0 0 16 16">
@@ -107,50 +107,51 @@
                                     <p>Комментарии: {{ product.comment }}</p>
                                 </div>
                                 <div class="row">
-                                    <h2>Количество</h2>
+
                                     <div class="table-responsive">
+
                                         <table class="table table-bordered table-sm">
+
                                             <thead>
+                                          <div class="card-header">
+                                            <h5 class="card-title text-center">Количество продукции</h5>
+                                        </div>
+                                            </thead>
                                             <tr>
                                                 <th scope="col"></th>
                                                 {% for el in quality %}
                                                 <th scope="col">{{ el.name }}</th>
                                                 {% endfor %}
-
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            {% for el in sum_location_quality %}
                                             <tr>
-                                                <th scope="row">Warehouse</th>
-                                                <td>{{ transaction_1_1.quantity__sum }}</td>
-                                                <td>{{ transaction_1_2.quantity__sum }}</td>
-                                                <td>{{ transaction_1_3.quantity__sum }}</td>
+                                                <th scope="row">{{ el.0 }}</th>
+                                                {% for value in el.1 %}
+                                                    <td>{{ value }}</td>
+                                                {% endfor %}
                                             </tr>
-                                            <tr>
-                                                <th scope="row">Office</th>
-                                                <td>{{ transaction_2_1.quantity__sum }}</td>
-                                                <td>{{ transaction_2_2.quantity__sum }}</td>
-                                                <td>{{ transaction_2_3.quantity__sum }}</td>
-                                            </tr>
-
+                                            {% endfor %}
                                             <th scope="row" class="table-warning">Total</th>
-                                            <td class="table-warning">{{ transaction_sum_1.quantity__sum }}</td>
-                                            <td class="table-warning">{{ transaction_sum_2.quantity__sum }}</td>
-                                            <td class="table-warning">{{ transaction_sum_3.quantity__sum }}</td>
+                                            {% for value in sum_total %}
+                                            <td class="table-warning">{{ value }}</td>
+<!--                                                <dt>{{ value }} шт</dt>-->
+                                            {% endfor %}
 
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                    </div>
                             </div>
                         </div><!--end col-->
-                    </div><!--end row-->
+<!--                    </div>&lt;!&ndash;end row&ndash;&gt;-->
                 </div><!--end card-body-->
             </div>
             <div class="card card-primary mt-3">
-                <div class="card-header">
-                    <h3 class="card-title text-center">Таблица</h3>
-                </div>
+<!--                <div class="card-header">-->
+                    <h3 class="card-title text-center">История перемещения продукции</h3>
+<!--                </div>-->
                 <div class="card-body">
                     <div class="row">
                         <!--                            <div class="col-lg-5 align-self-center">-->

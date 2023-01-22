@@ -81,7 +81,7 @@ class Transaction(models.Model):
     direction = models.ForeignKey(Direction, verbose_name="Откуда/Куда", on_delete=models.CASCADE, null=False)
     location = models.ForeignKey(Location, verbose_name="Перемещение (место)", on_delete=models.CASCADE, null=False)
     quality = models.ForeignKey(AssortmentQualityCategory, verbose_name="Качество продукции", on_delete=models.CASCADE, null=False)
-    quantity = models.DecimalField(max_digits=9, decimal_places=0, verbose_name="Количество", null=False, default=0)
+    quantity = models.DecimalField(max_digits=9, decimal_places=0, verbose_name="Количество", null=False)
     reason = models.TextField(max_length=2000, verbose_name="Причина перемещения", null=False)
     slug = AutoSlugField(populate_from='name', editable=False, always_update=True)
     date = models.DateField(verbose_name="Дата", auto_now_add=True)

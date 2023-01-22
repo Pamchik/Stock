@@ -16,50 +16,67 @@
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="card-body" style="display: block;">
-                            <div class="form-group">
-<!--                                <label for="inputName">Название</label>-->
-<!--                                <div id="inputName">-->
-<!--                                    <input id="inputName" class="form-control" type="text" value="{{ add_qty.name }}"-->
-<!--                                       aria-label="Disabled input example" disabled readonly>-->
-                                    {{ form.name }}
-<!--                                </div>-->
-                            </div>
-                            <div class="form-group">
-                                <div id="inputStatus">
-                                    {{ form.status }}
+<!--                            <div class="row">-->
+                                <!--                            <div class="row mb-3">-->
+                                <!--                                <div class="form-group">-->
+                                <!--                                <label for="inputName">Название</label>-->
+                                <!--                                <div id="inputName">-->
+                                <!--                                    <input id="inputName" class="form-control" type="text" value="{{ add_qty.name }}"-->
+                                <!--                                       aria-label="Disabled input example" disabled readonly>-->
+                                {{ form.name }}
+                                <!--                                </div>-->
+                                <!--                                </div>-->
+<!--                            </div>-->
+                            <!--                           </div>-->
+<!--                            <div class="row">-->
+                                <div class="form-group">
+                                    <div id="inputStatus">
+                                        {{ form.status }}
+                                    </div>
+                                </div>
+<!--                            </div>-->
+                            <div class="row mb-3">
+                                <div class="form-group">
+                                    <div id="inputDirection">
+                                        {{ form.direction }}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div id="inputDirection">
-                                    {{ form.direction }}
+                            <div class="row mb-3">
+                                <div class="form-group">
+                                    <label for="inputLocation">*Локация</label>
+                                    <div id="inputLocation">
+                                        {{ form.location }}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputLocation">*Локация</label>
-                                <div id="inputLocation">
-                                    {{ form.location }}
+                            <div class="row mb-3">
+                                <div class="form-group">
+                                    <label for="inputQuality">*Качество</label>
+                                    <div id="inputQuality">
+                                        {{ form.quality }}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputQuality">*Качество</label>
-                                <div id="inputQuality">
-                                    {{ form.quality }}
+                            <div class="row mb-3">
+                                <div class="form-group">
+                                    <label for="inputQuantity">*Количество</label>
+                                    <div id="inputQuantity">
+                                        {{ form.quantity }}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputQuantity">*Количество</label>
-                                <div id="inputQuantity">
-                                    {{ form.quantity }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputReason">*Причина</label>
-                                <div id="inputReason">
-                                    {{ form.reason }}
+                            <div class="row mb-3">
+                                <div class="form-group">
+                                    <label for="inputReason">*Причина</label>
+                                    <div id="inputReason">
+                                        {{ form.reason }}
+                                    </div>
                                 </div>
                             </div>
                             <p class="text-danger">*Обязательное поле для заполнения</p>
                             <button type="submit" class="btn btn-primary btn-block">Списать</button>
+                            <a class="btn btn-secondary" href="../" role="button">Отмена</a>
 
                             <span>{{ error }}</span>
                         </div>
