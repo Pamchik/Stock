@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from .forms import ProductForm, AddQtyForm, WriteOffQtyForm, MoveQtyFromForm, MoveQtyToForm
-from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
+from .forms import ProductForm, AddQtyForm, WriteOffQtyForm, MoveQtyFromForm, MoveQtyToForm, FormatForm
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ListView, FormView
 from django.db.models import Q, Sum
-
+from .admin import TestResourse
+from django.http import HttpResponse
 
 def index(request):
     return render(request, 'tables.html')
@@ -338,4 +339,27 @@ def MoveQtyView(request, slug):
 #     return render(request,'Mobile/AddNewEntry.html',{'form':form,'slug':slug}) # here
 
 
+
+
+class TestListView(ListView, FormView):
+    model = Test
+    template_name = 'test.html'
+    form_class = FormatForm
+
+    def tests(self, request, **kwargs):
+        qs = self.get_queryset()
+        dataset = TestResourse().export(qs)
+
+        format = request.POST.get('format')
+
+        if format == 'xls':
+            ds = dataset.xls
+        elif format == 'csv':
+            ds = dataset.csv
+        elif format == 'json':
+            ds = dataset.json
+
+        response = HttpResponse(ds, content_type=f'{format}')
+        response['Content-Disposition'] = f'attachment; filename=stock.{format}'
+        return response
 

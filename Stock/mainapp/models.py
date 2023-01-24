@@ -91,3 +91,13 @@ class Transaction(models.Model):
 
     def get_absolute_url(self):
         return f'/stock/{self.slug}'
+
+
+class Test(models.Model):
+    title = models.CharField(max_length=500)
+    description = models.TextField()
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.title)
