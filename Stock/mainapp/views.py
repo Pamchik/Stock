@@ -3,40 +3,43 @@ from .models import *
 from .forms import ProductForm, AddQtyForm, WriteOffQtyForm, MoveQtyFromForm, MoveQtyToForm, FormatForm
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ListView, FormView
 from django.db.models import Q, Sum
-from .admin import TestResourse
+from .admin import TestResource
 from django.http import HttpResponse
+
 
 def index(request):
     return render(request, 'tables.html')
 
+
 # def test(request):
 #     return render(request, 'test.html')
 
-def test(request):
-    quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
-    location_list = [p.name for p in Location.objects.all()]
-    quantity_dict = [[p.name, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
-    quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
-    product_list = [p.name for p in Product.objects.all()]
-    print(list_value_product(
-            product_list,
-            location_list,
-            quality_list,
-            quantity_list
-        ))
-    context = {
-        'total_table': list_value_product(
-            product_list,
-            location_list,
-            quality_list,
-            quantity_list,
+# def test(request):
+#     quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
+#     location_list = [p.name for p in Location.objects.all()]
+#     quantity_dict = [[p.name, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
+#     quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
+#     product_list = [p.name for p in Product.objects.all()]
+#     print(list_value_product(
+#         product_list,
+#         location_list,
+#         quality_list,
+#         quantity_list
+#     ))
+#     context = {
+#         'total_table': list_value_product(
+#             product_list,
+#             location_list,
+#             quality_list,
+#             quantity_list,
+#
+#         ),
+#         'category': AssortmentCategory.objects.all(),
+#         'quality': AssortmentQualityCategory.objects.all(),
+#         'stock': Product.objects.all(),
+#     }
+#     return render(request, 'test.html', context)
 
-        ),
-        'category': AssortmentCategory.objects.all(),
-        'quality': AssortmentQualityCategory.objects.all(),
-        'stock': Product.objects.all(),
-    }
-    return render(request, 'test.html', context)
 
 def list_value_product(product_list, location_list, quality_list, quantity_list):
     list_value = []
@@ -70,13 +73,13 @@ def list_value_product(product_list, location_list, quality_list, quantity_list)
     # print(list_value)
     return list_value
 
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'product_detail.html'
     context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
-
         name = self.object.slug
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['quality'] = AssortmentQualityCategory.objects.all()
@@ -147,8 +150,6 @@ def product_filter(request):
 
 
 def stock(request):
-
-
     quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
     location_list = [p.name for p in Location.objects.all()]
     quantity_dict = [[p.name, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
@@ -169,7 +170,6 @@ def stock(request):
     }
 
     return render(request, 'stock.html', context)
-
 
 
 def home(request):
@@ -298,17 +298,16 @@ def MoveQtyView(request, slug):
         form1 = MoveQtyFromForm(request.POST, prefix="form1", initial={'name': name})
         form2 = MoveQtyToForm(request.POST, prefix="form2", initial={'name': name})
 
-
         if form1.is_valid() and form2.is_valid():
             qty_from = form1.save(commit=False)
             qty_from.save()
             qty_to = form2.save(commit=False)
 
-            #name = form2.cleaned_data['name']
+            # name = form2.cleaned_data['name']
             # quantity = form2.cleaned_data['quantity']
             # reason = form2.cleaned_data['reason']
 
-            #qty_to.name = Product.name(request.POST['form1-name'])
+            # qty_to.name = Product.name(request.POST['form1-name'])
             qty_to.quantity = request.POST['form1-quantity']
             qty_to.reason = request.POST['form1-reason']
 
@@ -323,6 +322,7 @@ def MoveQtyView(request, slug):
     return render(request, 'move_qty.html', {
         'form1': form1, 'form2': form2, 'name': name
     })
+
 
 # def NewEntryView(request,slug):
 #     UserPresent=get_object_or_404(DiaryUser,Username=slug)
@@ -339,27 +339,63 @@ def MoveQtyView(request, slug):
 #     return render(request,'Mobile/AddNewEntry.html',{'form':form,'slug':slug}) # here
 
 
+def export_data(request):
+
+    if request.method == 'POST':
+        form = FormatForm(request.POST)
+        # Get selected option from form
+        file_format = request.POST['format']
+        test_resource = TestResource()
+        dataset = test_resource.export()
+        if file_format == 'csv':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.csv"'
+            return response
+        elif file_format == 'json':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.json"'
+            return response
+        elif file_format == 'xls':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.xls"'
+            return response
+    else:
+        form = FormatForm()
+
+    context = {
+        'transaction': Transaction.objects.all(),
+        'form': form
+    }
+
+    return render(request, 'test.html', context)
 
 
-class TestListView(ListView, FormView):
-    model = Test
-    template_name = 'test.html'
-    form_class = FormatForm
+# class TestListView(ListView, FormView):
+#     model = Test
+#     template_name = 'test.html'
+#     form_class = FormatForm
+#     success_url = '/test/'
+#
+#     def test(self, request, **kwargs):
+#         qs = self.get_queryset()
+#         dataset = TestResource().export(qs)
+#
+#         format = request.POST.get('format')
+#
+#         if format == 'xls':
+#             ds = dataset.xls
+#         elif format == 'csv':
+#             ds = dataset.csv
+#         else:
+#             ds = dataset.json
+#
+#     # def get_success_url(self):
+#     #
+#     #     return f'/{self.object.name.slug}'
+#     #     return render(request, 'stock.html', context = {'format':'format', 'ds':'ds'})
+#         response = HttpResponse(ds, content_type=f'{format}')
+#         response['Content-Disposition'] = f'attachment; filename=Stock.{format}'
+#         return response
 
-    def tests(self, request, **kwargs):
-        qs = self.get_queryset()
-        dataset = TestResourse().export(qs)
-
-        format = request.POST.get('format')
-
-        if format == 'xls':
-            ds = dataset.xls
-        elif format == 'csv':
-            ds = dataset.csv
-        elif format == 'json':
-            ds = dataset.json
-
-        response = HttpResponse(ds, content_type=f'{format}')
-        response['Content-Disposition'] = f'attachment; filename=stock.{format}'
-        return response
-
+        # return render(request, 'test.html', {'ds': ds}, content_type=f'{format}')
+        # return render(request, 'test.html')

@@ -233,4 +233,5 @@ FORMAT_CHOICES = (
     ('json', 'json'),
 )
 class FormatForm(forms.Form):
+
     format = forms.ChoiceField(choices=FORMAT_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}))

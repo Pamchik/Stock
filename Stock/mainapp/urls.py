@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-
+# app_name = 'Stock'
 urlpatterns = [
    path('home/', views.home, name='home'),
    path('', views.home, name='home'),
@@ -19,7 +19,7 @@ urlpatterns = [
    path('stock/<str:slug>/write-off/', views.WriteOffQtyView.as_view(), name='write-off-qty'),
    # path('stock/<str:slug>/move-from/', views.MoveQtyFromView.as_view(), name='move-from-qty'),
    # path('stock/<str:slug>/move-to/', views.MoveQtyToView.as_view(), name='move-to-qty')
-   path('stock/test', views.TestListView.as_view(), name='test'),
+   path('test/', views.export_data, name='test'),
 
 
 ]

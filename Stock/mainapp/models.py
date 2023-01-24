@@ -94,6 +94,7 @@ class Transaction(models.Model):
 
 
 class Test(models.Model):
+
     title = models.CharField(max_length=500)
     description = models.TextField()
     is_active = models.BooleanField(default=True)
