@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>{{ product.name }}</title>
+{% endblock %}
+{% block body %}
+<div id="layoutSidenav_content">
+    <div class="container"><br>
+        <div class="row">
+
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#download-modal">
+                Download
+            </button>
+
+            <div class="modal fade" id="download-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">download posts</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-primary">save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card card-primary mt-3">
+<!--                <div class="card-header">-->
+                    <h3 class="card-title text-center">История перемещения продукции</h3>
+<!--                </div>-->
+                <div class="card-body">
+                    <div class="row">
+                        <!--                            <div class="col-lg-5 align-self-center">-->
+                        <div class="table-responsive">
+                            <table id="datatablesSimple">
+                                <thead>
+                                <tr>
+
+                                    <th scope="col">date</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">status</th>
+                                    <th scope="col">direction</th>
+                                    <th scope="col">location</th>
+                                    <th scope="col">quality</th>
+                                    <th scope="col">quantity</th>
+                                    <th scope="col">reason</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for el in transaction %}
+                                <tr>
+                                    <th scope="row">{{ el.date }}</th>
+<!--                                    <th scope="row">{{ el.name }}</th>-->
+                                    <td>{{ el.name }}</td>
+                                    <td>{{ el.status }}</td>
+                                    <td>{{ el.direction }}</td>
+                                    <td>{{ el.location }}</td>
+                                    <td>{{ el.quality }}</td>
+                                    <td>{{ el.quantity }}</td>
+                                    <td>{{ el.reason }}</td>
+
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--                            </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
