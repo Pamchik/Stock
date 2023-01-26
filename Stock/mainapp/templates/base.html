@@ -13,11 +13,13 @@
         {% block title %}
         {% endblock %}
 
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap5.min.css">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">-->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap5.min.css">
+
 
 
 
@@ -141,9 +143,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
-        <!--<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>-->
-        <!--<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>-->
+        <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js"></script>
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>-->
+<!--        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>-->
 
         <script type="text/javascript">
            $(document).ready(function() {
@@ -151,7 +153,7 @@
                 lengthChange: false [
                     [ '10 rows', '25 rows', '50 rows', '100 rows' ]
                 ],
-                buttons: [ 'pageLength', 'copy', 'excel', 'pdf', 'colvis' ],
+                buttons: [ 'pageLength', 'colvis', 'copy', 'excel', 'pdf' ],
                 columnDefs: [
                         {
                             targets: 4,

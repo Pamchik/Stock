@@ -6,8 +6,8 @@ class ProductForm(ModelForm):
 
     class Meta:
         model = Product
-        fields = ['category', 'name', 'description', 'comment', 'image']
-        # fields = ['category', 'number', 'name', 'description', 'comment', 'image']
+        # fields = ['category', 'name', 'description', 'comment', 'image']
+        fields = ['category', 'number', 'name', 'description', 'comment', 'image']
 
         widgets = {
             'category': Select(attrs={
@@ -16,6 +16,9 @@ class ProductForm(ModelForm):
             }),
             'name': TextInput(attrs={
                 'class': 'form-control'
+            }),
+            'number': TextInput(attrs={
+                'style': 'display:none'
             }),
             'description': Textarea(attrs={
                 'class': 'form-control',
@@ -50,14 +53,11 @@ class AddQtyForm(ModelForm):
 
     class Meta:
         model = Transaction
-        fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
-        # fields = ['number', 'name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        # fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        fields = ['number', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
         widgets = {
-            # 'number': Select(attrs={
-            #     'style': 'display:none'
-            # }),
-            'name': Select(attrs={
+            'number': Select(attrs={
                 'style': 'display:none'
             }),
             'location': Select(attrs={
@@ -101,15 +101,12 @@ class WriteOffQtyForm(ModelForm):
 
     class Meta:
         model = Transaction
-        fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
-        # fields = ['number', 'name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        # fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        fields = ['number', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
 
         widgets = {
-            # 'number': Select(attrs={
-            #     'style': 'display:none'
-            # }),
-            'name': Select(attrs={
+            'number': Select(attrs={
                 'style': 'display:none'
             }),
             'location': Select(attrs={
@@ -160,16 +157,16 @@ class MoveQtyFromForm(ModelForm):
 
     class Meta:
         model = Transaction
-        fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
-        # fields = ['number', 'name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        # fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        fields = ['number', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
         widgets = {
-            # 'number': Select(attrs={
-            #     'style': 'display:none'
-            # }),
-            'name': Select(attrs={
+            'number': Select(attrs={
                 'style': 'display:none'
             }),
+            # 'name': Select(attrs={
+            #     'style': 'display:none'
+            # }),
             'location': Select(attrs={
                 'class': 'form-control'
             }),
@@ -228,16 +225,16 @@ class MoveQtyToForm(ModelForm):
 
     class Meta:
         model = Transaction
-        fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
-        # fields = ['number', 'name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        # fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        fields = ['number', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
         widgets = {
-            # 'number': Select(attrs={
-            #     'style': 'display:none'
-            # }),
-            'name': Select(attrs={
+            'number': Select(attrs={
                 'style': 'display:none'
             }),
+            # 'name': Select(attrs={
+            #     'style': 'display:none'
+            # }),
             'location': Select(attrs={
                 'class': 'form-control'
             }),

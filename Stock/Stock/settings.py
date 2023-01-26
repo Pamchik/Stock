@@ -128,7 +128,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = (
-     os.path.join(BASE_DIR, '/static'),
+     os.path.join(BASE_DIR, '/static/'),
 )
 
-IMPORT_EXPORT_USE_TRANSACTIONS = True
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
+# IMPORT_EXPORT_USE_TRANSACTIONS = True

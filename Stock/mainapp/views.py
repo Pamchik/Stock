@@ -134,10 +134,10 @@ class ProductDeleteView(DeleteView):
 def stock(request):
     quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
     location_list = [p.name for p in Location.objects.all()]
-    quantity_dict = [[p.name, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
+    quantity_dict = [[p.number, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
     quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
-    product_list = [p.name for p in Product.objects.all()]
-    # product_list = [p.number for p in Product.objects.all()]
+    # product_list = [p.name for p in Product.objects.all()]
+    product_list = [p.number for p in Product.objects.all()]
 
 
     context = {
@@ -187,12 +187,12 @@ class AddQtyView(CreateView):
     context_object_name = 'product'
 
     def get_initial(self):
-        name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
+        number = get_object_or_404(Product, slug=self.kwargs.get('slug'))
         return {
-            'name': name
+            'number': number
         }
     def get_success_url(self):
-        return f'/stock/{self.object.name.slug}'
+        return f'/stock/{self.object.number.slug}'
 
 
 class WriteOffQtyView(CreateView):
@@ -202,20 +202,20 @@ class WriteOffQtyView(CreateView):
     context_object_name = 'write-off_qty'
 
     def get_initial(self):
-        name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
+        number = get_object_or_404(Product, slug=self.kwargs.get('slug'))
         return {
-            'name': name
+            'number': number
         }
     def get_success_url(self):
-        return f'/stock/{self.object.name.slug}'
+        return f'/stock/{self.object.number.slug}'
 
 
 def MoveQtyView(request, slug):
-    name = get_object_or_404(Product, slug=slug)
+    number = get_object_or_404(Product, slug=slug)
 
     if request.method == 'POST':
-        form1 = MoveQtyFromForm(request.POST, prefix="form1", initial={'name': name})
-        form2 = MoveQtyToForm(request.POST, prefix="form2", initial={'name': name})
+        form1 = MoveQtyFromForm(request.POST, prefix="form1", initial={'number': number})
+        form2 = MoveQtyToForm(request.POST, prefix="form2", initial={'number': number})
 
         if form1.is_valid() and form2.is_valid():
             qty_from = form1.save(commit=False)
@@ -228,11 +228,11 @@ def MoveQtyView(request, slug):
             qty_to.save()
             return redirect('stock')
     else:
-        form1 = MoveQtyFromForm(prefix="form1", initial={'name': name})
-        form2 = MoveQtyToForm(prefix="form2", initial={'name': name})
+        form1 = MoveQtyFromForm(prefix="form1", initial={'number': number})
+        form2 = MoveQtyToForm(prefix="form2", initial={'number': number})
 
     return render(request, 'move_qty.html', {
-        'form1': form1, 'form2': form2, 'name': name
+        'form1': form1, 'form2': form2, 'number': number
     })
 
 

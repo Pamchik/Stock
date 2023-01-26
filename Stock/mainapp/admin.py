@@ -28,7 +28,7 @@ class ProductAdmin(admin.ModelAdmin):
         ("General information", {
             # "classes": ("collapse",),
             "fields": (("category",),
-                       # ("number",),
+                       ("number",),
                        ("name",),
                        ("description",),
                        ("comment",),
@@ -54,9 +54,9 @@ class TestResource(resources.ModelResource):
     # def dehydrate_created(self, obj):
     #     return obj.created.strftime('%d-%m-%Y %H:%M:%S')
 
-@admin.register(Test)
-class TestAdmin(ImportExportModelAdmin):
-    pass
+# @admin.register(Product)
+# class TestAdmin(ImportExportModelAdmin):
+#     pass
 
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
