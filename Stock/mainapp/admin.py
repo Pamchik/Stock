@@ -28,6 +28,7 @@ class ProductAdmin(admin.ModelAdmin):
         ("General information", {
             # "classes": ("collapse",),
             "fields": (("category",),
+                       # ("number",),
                        ("name",),
                        ("description",),
                        ("comment",),

@@ -7,6 +7,8 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'name', 'description', 'comment', 'image']
+        # fields = ['category', 'number', 'name', 'description', 'comment', 'image']
+
         widgets = {
             'category': Select(attrs={
                 'class': 'form-control custom-select'
@@ -49,8 +51,12 @@ class AddQtyForm(ModelForm):
     class Meta:
         model = Transaction
         fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        # fields = ['number', 'name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
         widgets = {
+            # 'number': Select(attrs={
+            #     'style': 'display:none'
+            # }),
             'name': Select(attrs={
                 'style': 'display:none'
             }),
@@ -96,8 +102,13 @@ class WriteOffQtyForm(ModelForm):
     class Meta:
         model = Transaction
         fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        # fields = ['number', 'name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+
 
         widgets = {
+            # 'number': Select(attrs={
+            #     'style': 'display:none'
+            # }),
             'name': Select(attrs={
                 'style': 'display:none'
             }),
@@ -150,8 +161,12 @@ class MoveQtyFromForm(ModelForm):
     class Meta:
         model = Transaction
         fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        # fields = ['number', 'name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
         widgets = {
+            # 'number': Select(attrs={
+            #     'style': 'display:none'
+            # }),
             'name': Select(attrs={
                 'style': 'display:none'
             }),
@@ -214,8 +229,12 @@ class MoveQtyToForm(ModelForm):
     class Meta:
         model = Transaction
         fields = ['name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
+        # fields = ['number', 'name', 'status', 'direction', 'location', 'quality', 'quantity', 'reason']
 
         widgets = {
+            # 'number': Select(attrs={
+            #     'style': 'display:none'
+            # }),
             'name': Select(attrs={
                 'style': 'display:none'
             }),
@@ -226,6 +245,7 @@ class MoveQtyToForm(ModelForm):
                 'class': 'form-control'
             })
         }
+
 
 FORMAT_CHOICES = (
     ('xls', 'xls'),

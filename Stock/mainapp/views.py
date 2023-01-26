@@ -7,10 +7,6 @@ from .admin import TestResource
 from django.http import HttpResponse
 
 
-def index(request):
-    return render(request, 'tables.html')
-
-
 # def test(request):
 #     return render(request, 'test.html')
 
@@ -58,20 +54,31 @@ def list_value_product(product_list, location_list, quality_list, quantity_list)
         list_value.append([i_product, list_value_lvl1])
         i += 1
 
-    # list_value_total = []
-    # i = 0
-    # for i_product in product_list:
-    #     list_value_lvl1 = []
-    #     for i_quality in quality_list:
-    #         sum = 0
-    #         for i_quantity in quantity_list:
-    #             if i_quantity[1] == i_quality:
-    #                 sum += int(i_quantity[2])
-    #         list_value_lvl1.append(sum)
-    #     list_value_total.append([i_product, description_list[i], slug_list[i], list_value_lvl1])
-    #     i += 1
-    # print(list_value)
     return list_value
+
+def list_value(location_list, quality_list, quantity_list, **kwargs):
+    list_value = []
+    for i_location in location_list:
+        list_value_lvl2 = []
+        for i_quality in quality_list:
+            sum = 0
+            for i_quantity in quantity_list:
+                if i_quantity[0] == i_location and i_quantity[1] == i_quality:
+                    sum += int(i_quantity[2])
+            list_value_lvl2.append(sum)
+        list_value.append([i_location, list_value_lvl2])
+    return list_value
+
+
+def list_value_total(quality_list, quantity_list, **kwargs):
+    list_value_total = []
+    for i_quality in quality_list:
+        sum_total = 0
+        for i_quantity in quantity_list:
+            if i_quantity[1] == i_quality:
+                sum_total += int(i_quantity[2])
+        list_value_total.append(sum_total)
+    return list_value_total
 
 
 class ProductDetailView(DetailView):
@@ -100,31 +107,6 @@ class ProductDetailView(DetailView):
         return context
 
 
-def list_value(location_list, quality_list, quantity_list, **kwargs):
-    list_value = []
-    for i_location in location_list:
-        list_value_lvl2 = []
-        for i_quality in quality_list:
-            sum = 0
-            for i_quantity in quantity_list:
-                if i_quantity[0] == i_location and i_quantity[1] == i_quality:
-                    sum += int(i_quantity[2])
-            list_value_lvl2.append(sum)
-        list_value.append([i_location, list_value_lvl2])
-    return list_value
-
-
-def list_value_total(quality_list, quantity_list, **kwargs):
-    list_value_total = []
-    for i_quality in quality_list:
-        sum_total = 0
-        for i_quantity in quantity_list:
-            if i_quantity[1] == i_quality:
-                sum_total += int(i_quantity[2])
-        list_value_total.append(sum_total)
-    return list_value_total
-
-
 class ProductUpdateView(UpdateView):
     model = Product
     template_name = 'update_product.html'
@@ -139,14 +121,14 @@ class ProductDeleteView(DeleteView):
     context_object_name = 'product'
 
 
-def product_filter(request):
-    context = {
-        'category': AssortmentCategory.objects.all(),
-        'quality_category': AssortmentQualityCategory.objects.all(),
-        'stock': Product.objects.all()
-        # 'qty_product': QuantityProducts.objects.all()
-    }
-    return render(request, 'product_detail_.html', context)
+# def product_filter(request):
+#     context = {
+#         'category': AssortmentCategory.objects.all(),
+#         'quality_category': AssortmentQualityCategory.objects.all(),
+#         'stock': Product.objects.all()
+#         # 'qty_product': QuantityProducts.objects.all()
+#     }
+#     return render(request, 'product_detail_.html', context)
 
 
 def stock(request):
@@ -155,6 +137,8 @@ def stock(request):
     quantity_dict = [[p.name, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
     quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
     product_list = [p.name for p in Product.objects.all()]
+    # product_list = [p.number for p in Product.objects.all()]
+
 
     context = {
         'total_table': list_value_product(
@@ -179,8 +163,8 @@ def home(request):
 def history(request):
     context = {
         'transaction': Transaction.objects.all(),
-        'quality_category': AssortmentQualityCategory.objects.all(),
-        'stock': Product.objects.all(),
+        # 'quality_category': AssortmentQualityCategory.objects.all(),
+        # 'stock': Product.objects.all(),
         # 'qty_product': QuantityProducts.objects.all()
     }
     return render(request, 'history.html', context)
@@ -207,7 +191,6 @@ class AddQtyView(CreateView):
         return {
             'name': name
         }
-
     def get_success_url(self):
         return f'/stock/{self.object.name.slug}'
 
@@ -223,73 +206,9 @@ class WriteOffQtyView(CreateView):
         return {
             'name': name
         }
-
     def get_success_url(self):
         return f'/stock/{self.object.name.slug}'
 
-
-class MoveQtyFromView(CreateView):
-    model = Transaction
-    template_name = 'move_from_qty.html'
-    form_class = MoveQtyFromForm
-    context_object_name = 'move_from_qty'
-
-    def get_initial(self):
-        name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
-        return {
-            'name': name
-        }
-
-    def get_success_url(self):
-        return f'/stock/{self.object.name.slug}/move-to/'
-
-
-class MoveQtyToView(CreateView):
-    model = Transaction
-    template_name = 'move_to_qty.html'
-    form_class = MoveQtyToForm
-    context_object_name = 'move_to_qty'
-
-    def get_initial(self):
-        name = get_object_or_404(Product, slug=self.kwargs.get('slug'))
-        return {
-            'name': name
-        }
-
-    def get_success_url(self):
-        return f'/stock/{self.object.name.slug}'
-
-
-# def MoveQtyView(request):
-#     if request.method == 'POST':
-#         form1 = MoveQtyFromForm(request.POST, prefix="form1")
-#         form2 = MoveQtyToForm(request.POST, prefix="form2")
-#
-#
-#         if form1.is_valid() and form2.is_valid():
-#             qty_from = form1.save(commit=False)
-#             qty_from.save()
-#             qty_to = form2.save(commit=False)
-#
-#             #name = form2.cleaned_data['name']
-#             quantity = form2.cleaned_data['quantity']
-#             reason = form2.cleaned_data['reason']
-#
-#             #qty_to.name = Product.name(request.POST['form1-name'])
-#             qty_to.quantity = request.POST['form1-quantity']
-#             qty_to.reason = request.POST['form1-reason']
-#
-#             qty_to.save()
-#             # print(request.POST)
-#             return redirect('stock')
-#
-#     else:
-#         form1 = MoveQtyFromForm(prefix="form1")
-#         form2 = MoveQtyToForm(prefix="form2")
-#
-#     return render(request, 'move_qty_old.html', {
-#         'form1': form1, 'form2': form2,
-#     })
 
 def MoveQtyView(request, slug):
     name = get_object_or_404(Product, slug=slug)
@@ -303,18 +222,11 @@ def MoveQtyView(request, slug):
             qty_from.save()
             qty_to = form2.save(commit=False)
 
-            # name = form2.cleaned_data['name']
-            # quantity = form2.cleaned_data['quantity']
-            # reason = form2.cleaned_data['reason']
-
-            # qty_to.name = Product.name(request.POST['form1-name'])
             qty_to.quantity = request.POST['form1-quantity']
             qty_to.reason = request.POST['form1-reason']
 
             qty_to.save()
-            # print(request.POST)
             return redirect('stock')
-
     else:
         form1 = MoveQtyFromForm(prefix="form1", initial={'name': name})
         form2 = MoveQtyToForm(prefix="form2", initial={'name': name})
@@ -324,78 +236,33 @@ def MoveQtyView(request, slug):
     })
 
 
-# def NewEntryView(request,slug):
-#     UserPresent=get_object_or_404(DiaryUser,Username=slug)
-#     if request.method=='POST':
-#         form=MakeADiaryForm(request.POST, instance=UserPresent) # You have to define the instance you want to edit othervise it tries to create a new one. Most probobly this was your issue
-#         if form.is_valid():
-#             BlogEntry=form.save(commit=False)
-#             BlogEntry.DiaryUser=slug
-#             BlogEntry.save()
-#             return redirect('Display',**{'slug':BlogEntry.DiaryUer})
+
+# def export_data(request):
+#
+#     if request.method == 'POST':
+#         form = FormatForm(request.POST)
+#         # Get selected option from form
+#         file_format = request.POST['format']
+#         test_resource = TestResource()
+#         dataset = test_resource.export()
+#         if file_format == 'csv':
+#             response = HttpResponse(dataset.csv, content_type='text/csv')
+#             response['Content-Disposition'] = 'attachment; filename="exported_data.csv"'
+#             return response
+#         elif file_format == 'json':
+#             response = HttpResponse(dataset.json, content_type='application/json')
+#             response['Content-Disposition'] = 'attachment; filename="exported_data.json"'
+#             return response
+#         elif file_format == 'xls':
+#             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+#             response['Content-Disposition'] = 'attachment; filename="exported_data.xls"'
+#             return response
 #     else:
-#         form=MakeADiaryForm()
+#         form = FormatForm()
 #
-#     return render(request,'Mobile/AddNewEntry.html',{'form':form,'slug':slug}) # here
-
-
-def export_data(request):
-
-    if request.method == 'POST':
-        form = FormatForm(request.POST)
-        # Get selected option from form
-        file_format = request.POST['format']
-        test_resource = TestResource()
-        dataset = test_resource.export()
-        if file_format == 'csv':
-            response = HttpResponse(dataset.csv, content_type='text/csv')
-            response['Content-Disposition'] = 'attachment; filename="exported_data.csv"'
-            return response
-        elif file_format == 'json':
-            response = HttpResponse(dataset.json, content_type='application/json')
-            response['Content-Disposition'] = 'attachment; filename="exported_data.json"'
-            return response
-        elif file_format == 'xls':
-            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="exported_data.xls"'
-            return response
-    else:
-        form = FormatForm()
-
-    context = {
-        'transaction': Transaction.objects.all(),
-        'form': form
-    }
-
-    return render(request, 'test.html', context)
-
-
-# class TestListView(ListView, FormView):
-#     model = Test
-#     template_name = 'test.html'
-#     form_class = FormatForm
-#     success_url = '/test/'
+#     context = {
+#         'transaction': Transaction.objects.all(),
+#         'form': form
+#     }
 #
-#     def test(self, request, **kwargs):
-#         qs = self.get_queryset()
-#         dataset = TestResource().export(qs)
-#
-#         format = request.POST.get('format')
-#
-#         if format == 'xls':
-#             ds = dataset.xls
-#         elif format == 'csv':
-#             ds = dataset.csv
-#         else:
-#             ds = dataset.json
-#
-#     # def get_success_url(self):
-#     #
-#     #     return f'/{self.object.name.slug}'
-#     #     return render(request, 'stock.html', context = {'format':'format', 'ds':'ds'})
-#         response = HttpResponse(ds, content_type=f'{format}')
-#         response['Content-Disposition'] = f'attachment; filename=Stock.{format}'
-#         return response
-
-        # return render(request, 'test.html', {'ds': ds}, content_type=f'{format}')
-        # return render(request, 'test.html')
+#     return render(request, 'test.html', context)
