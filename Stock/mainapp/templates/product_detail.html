@@ -11,14 +11,16 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-5 align-self-center">
-                                <img src="{{ product.image.url }}" alt="" class="mx-auto d-block" height="300">
+                                <div class="row">
+                                    <h6 class="text-secondary">{{ product.number }}</h6>
+                                </div>
+                                    <img src="{{ product.image.url }}" alt="" class="mx-auto d-block" height="300">
                             </div><!--end col-->
                             <div class="col-lg-7">
                                 <div class="single-pro-detail">
 
                                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
                                         <h1 class="h3 text-primary">{{ product.name }}</h1>
-                                        <h1 class="h3 text-primary">{{ product.number }}</h1>
                                         <div class="btn-group" role="group"
                                              aria-label="Button group with nested dropdown">
                                             <div class="btn-group" role="group">
@@ -150,17 +152,17 @@
                 </div><!--end card-body-->
             </div>
             <div class="card card-primary mt-3">
-<!--                <div class="card-header">-->
                     <h3 class="card-title text-center">История перемещения продукции</h3>
-<!--                </div>-->
-                <div class="card-body">
-                    <div class="row">
-                        <!--                            <div class="col-lg-5 align-self-center">-->
-                        <div class="table-responsive">
-                            <table id="datatablesSimple">
+
+                                    <div class="card-body">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table id="example"
+                                       class="table table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                                       style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
+                                       aria-describedby="datatable-buttons_info">
                                 <thead>
                                 <tr>
-
                                     <th scope="col">Дата</th>
                                     <th scope="col">Номер</th>
                                     <th scope="col">Действие</th>
@@ -171,7 +173,6 @@
                                     <th scope="col">Причина</th>
                                 </tr>
                                 </thead>
-
                                 <tbody>
                                 {% for el in transaction %}
                                 <tr>
@@ -188,11 +189,63 @@
                                 </tr>
                                 {% endfor %}
                                 </tbody>
-                            </table>
+<!--                                    <tfoot>-->
+<!--                                    <tr>-->
+<!--                                        <th>Name</th>-->
+<!--                                        <th>Position</th>-->
+<!--                                        <th>Office</th>-->
+<!--                                        <th>Age</th>-->
+<!--                                        <th>Start date</th>-->
+<!--                                        <th>Salary</th>-->
+<!--                                    </tr>-->
+<!--                                    </tfoot>-->
+                                </table>
+                            </div>
                         </div>
-                        <!--                            </div>-->
                     </div>
-                </div>
+
+
+
+<!--                <div class="card-body">-->
+<!--                    <div class="row">-->
+<!--                        &lt;!&ndash;                            <div class="col-lg-5 align-self-center">&ndash;&gt;-->
+<!--                        <div class="table-responsive">-->
+<!--                            <table id="datatablesSimple">-->
+<!--                                <thead>-->
+<!--                                <tr>-->
+
+<!--                                    <th scope="col">Дата</th>-->
+<!--                                    <th scope="col">Номер</th>-->
+<!--                                    <th scope="col">Действие</th>-->
+<!--                                    <th scope="col">Направление</th>-->
+<!--                                    <th scope="col">Локация</th>-->
+<!--                                    <th scope="col">Качество</th>-->
+<!--                                    <th scope="col">Кол-во</th>-->
+<!--                                    <th scope="col">Причина</th>-->
+<!--                                </tr>-->
+<!--                                </thead>-->
+
+<!--                                <tbody>-->
+<!--                                {% for el in transaction %}-->
+<!--                                <tr>-->
+<!--                                    <th scope="row">{{ el.date }}</th>-->
+<!--&lt;!&ndash;                                    <th scope="row">{{ el.name }}</th>&ndash;&gt;-->
+<!--                                    <td>{{ el.number }}</td>-->
+<!--                                    <td>{{ el.status }}</td>-->
+<!--                                    <td>{{ el.direction }}</td>-->
+<!--                                    <td>{{ el.location }}</td>-->
+<!--                                    <td>{{ el.quality }}</td>-->
+<!--                                    <td>{{ el.quantity }}</td>-->
+<!--                                    <td>{{ el.reason }}</td>-->
+
+<!--                                </tr>-->
+<!--                                {% endfor %}-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>

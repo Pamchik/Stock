@@ -1362,6 +1362,11 @@ progress {
     width: auto;
   }
 
+  .col-lg-05 {
+    flex: 0 0 auto;
+    width: 4.15%;
+  }
+
   .col-lg-1 {
     flex: 0 0 auto;
     width: 8.33333333%;
@@ -2741,6 +2746,7 @@ textarea.form-control-lg {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+  height: 1.5em;
   width: 100%;
 }
 .input-group > .form-control, .input-group > .dataTable-input,
@@ -3075,8 +3081,7 @@ textarea.form-control-lg {
 }
 
 .btn-secondary {
-  color: #fff;
-  background-color: #6c757d;
+  color: #6c757d;
   border-color: #6c757d;
 }
 .btn-secondary:hover {
@@ -3793,9 +3798,9 @@ textarea.form-control-lg {
   background-color: #e9ecef;
 }
 .dropdown-item.active, .dropdown-item:active {
-  color: #fff;
+  color: #212529;
   text-decoration: none;
-  background-color: #0d6efd;
+  background-color: #adb5bd;
 }
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #adb5bd;
@@ -3958,7 +3963,7 @@ textarea.form-control-lg {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #0d6efd;
+  color: #212529;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
@@ -3977,7 +3982,7 @@ textarea.form-control-lg {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #ffc107;
 }
 .nav-tabs .nav-link {
   margin-bottom: -1px;
@@ -3997,9 +4002,9 @@ textarea.form-control-lg {
 }
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
+  color: #ffc107;
   background-color: #fff;
-  border-color: #dee2e6 #dee2e6 #fff;
+  border-color: #ffc107 #ffc107 #fff;
 }
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
@@ -6963,7 +6968,7 @@ textarea.form-control-lg {
 
 .w-50 {
   width: 50% !important;
-}
+ }
 
 .w-75 {
   width: 75% !important;
@@ -6972,6 +6977,11 @@ textarea.form-control-lg {
 .w-100 {
   width: 100% !important;
 }
+
+.w-150 {
+  width: 150% !important;
+}
+
 
 .w-auto {
   width: auto !important;
@@ -7568,7 +7578,7 @@ textarea.form-control-lg {
 }
 
 .pb-2 {
-  padding-bottom: 0.5rem !important;
+  padding-bottom: 1rem !important;
 }
 
 .pb-3 {
@@ -11540,6 +11550,10 @@ body {
 
 .dataTable-wrapper .dataTable-container {
   font-size: 0.875rem;
+}
+
+.dataTables_wrapper {
+    position: relative;
 }
 
 .dataTable-wrapper.no-header .dataTable-container {

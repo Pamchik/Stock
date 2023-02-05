@@ -1,7 +1,5 @@
 from django.db import models
 from autoslug import AutoSlugField
-from django.urls import reverse
-from datetime import date
 
 
 class AssortmentCategory(models.Model):
@@ -62,7 +60,7 @@ class Product(models.Model):
     slug = AutoSlugField(populate_from='number', editable=True, always_update=True)
     image = models.ImageField(verbose_name="Фотография", upload_to='photos_parts', default='default.jpg')
     comment = models.TextField(max_length=2000, verbose_name="Описание", null=True, blank=True)
-    date = models.DateField(verbose_name="Дата", auto_now_add=True)
+    # date = models.DateField(verbose_name="Дата", auto_now_add=True)
     number = models.CharField(max_length=7, unique=True, default=func, verbose_name='Номер продукта')
 
 
@@ -76,7 +74,6 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Product'
-
 
 class Direction(models.Model):
     name = models.CharField(max_length=255, verbose_name="Куда/Откуда")
@@ -112,12 +109,13 @@ class Transaction(models.Model):
         return f'/stock/{self.slug}'
 
 
-# class Test(models.Model):
-#
-#     title = models.CharField(max_length=500)
-#     description = models.TextField()
-#     is_active = models.BooleanField(default=True)
-#     created = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return str(self.title)
+class Test(models.Model):
+
+    title = models.CharField(max_length=500)
+    description = models.TextField()
+    # is_active = models.BooleanField(default=True)
+    # created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.title)
+

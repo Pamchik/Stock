@@ -20,56 +20,68 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div id="list" class="container tab-pane active"><br>
-                <form action="" method="get">
-                    <div class="d-flex justify-content-between pb-2 border-bottom">
-                        <!--            <h1 class="h2">Список товаров</h1>-->
+<form action="" method="get">
+                <div class="d-flex justify-content-between pb-2 border-bottom">
+                    <!--            <h1 class="h2">Список товаров</h1>-->
 
 
-                        <div class="input-group w-50">
-                            {% if search_message == "Search..." %}
-                            <button class="input-group-text" id="basic-addon1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-                                </svg>
-                            </button>
+                    <div class="input-group w-50">
+                        {% if search_message == "Search..." %}
+                        <button class="input-group-text" id="basic-addon1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                            </svg>
+                        </button>
 
-                            {% else %}
-                            <a class="input-group-text btn btn-danger" href="{% url 'stock' %}" role="button">
+                        {% else %}
+                        <a class="input-group-text btn btn-danger" href="{% url 'test2' %}" role="button">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-x-lg" viewBox="0 0 16 16">
-                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
-                                </svg>
-                            </a>
-                            {% endif %}
-                            <input type="text" class="form-control" name="query" placeholder="{{ search_message }}"
-                                   aria-label="Input group example"
-                                   aria-describedby="basic-addon1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
+                            </svg>
+                        </a>
+                        {% endif %}
+                            <input type="text" class="form-control" name="query" placeholder="{{ search_message }}" aria-label="Input group example"
+                               aria-describedby="basic-addon1">
 
-                            <!--                            <button class="submit">-->
-                            <!--                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
-                            <!--                                class="bi bi-search" viewBox="0 0 16 16">-->
-                            <!--                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>-->
-                            <!--                            </svg>-->
-                            <!--                            </button>-->
-                        </div>
-
-
-                        <div class="btn-toolbar mb-2 mb-md-0">
-
-                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'create' %}" role="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                          d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                </svg>
-                                Добавить новый товар
-                            </a>
-
-                        </div>
+<!--                            <button class="submit">-->
+<!--                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
+<!--                                class="bi bi-search" viewBox="0 0 16 16">-->
+<!--                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>-->
+<!--                            </svg>-->
+<!--                            </button>-->
                     </div>
-                </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="btn-toolbar mb-2 mb-md-0">
+
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'create' %}" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                            Добавить
+                        </a>
+
+                    </div>
+                </div>
+    </form>
                 <section class="py-2">
                     <div class="card">
 
@@ -246,7 +258,7 @@
                                 <path fill-rule="evenodd"
                                       d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
-                            Добавить новый товар
+                            Добавить
                         </a>
                     </div>
                 </div>

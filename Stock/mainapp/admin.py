@@ -1,8 +1,6 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
 from .models import *
 from import_export import resources
-from import_export.fields import Field
 
 class AssortmentCategoryAdmin(admin.ModelAdmin):
     fields = (("name",),)
@@ -58,6 +56,7 @@ class TestResource(resources.ModelResource):
 # class TestAdmin(ImportExportModelAdmin):
 #     pass
 
+
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
 admin.site.register(AssortmentCategory, AssortmentCategoryAdmin)
@@ -66,7 +65,7 @@ admin.site.register(AssortmentQualityCategory, AssortmentQualityCategoryAdmin)
 admin.site.register(Direction)
 admin.site.register(Status)
 admin.site.register(Transaction)
-# admin.site.register(Test)
+admin.site.register(Test)
 
 
 

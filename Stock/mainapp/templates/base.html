@@ -14,13 +14,15 @@
         {% endblock %}
 
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap5.min.css">
-
+<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">-->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">-->
 
-
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
 
 
@@ -33,12 +35,12 @@
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
+<!--            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">-->
+<!--                <div class="input-group">-->
+<!--                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />-->
+<!--                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>-->
+<!--                </div>-->
+<!--            </form>-->
             <!-- Navbar-->
 <!--            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">-->
 <!--                <li class="nav-item dropdown">-->
@@ -61,17 +63,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-home-alt"></i></div>
                                 Home
                             </a>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseStock" aria-expanded="false" aria-controls="collapseStock">
+                            <a class="nav-link" href="{% url 'stock' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Stock
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseStock" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'stock' %}">List</a>
-                                    <a class="nav-link" href="#">Table</a>
-                                </nav>
-                            </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseHistory" aria-expanded="false" aria-controls="collapseHistory">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 History
@@ -132,6 +127,9 @@
         <script src="{% static 'assets/demo/chart-bar-demo.js' %}/"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+        <script src="{% static 'js/tableExport.js' %}"></script>
+
+
 
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
@@ -147,16 +145,18 @@
 <!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>-->
 <!--        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>-->
 
+
+
         <script type="text/javascript">
            $(document).ready(function() {
             var table = $('#example').DataTable( {
                 lengthChange: false [
                     [ '10 rows', '25 rows', '50 rows', '100 rows' ]
                 ],
-                buttons: [ 'pageLength', 'colvis', 'copy', 'excel', 'pdf' ],
+                buttons: ['copy', 'excel', 'pdf', 'pageLength', 'colvis'  ],
                 columnDefs: [
                         {
-                            targets: 4,
+                            targets: 0,
                             render: DataTable.render.date(),
                         },
                     ]
@@ -166,5 +166,99 @@
         } );
 
         </script>
+<!--                scrollX: true,-->
+
+<!--          <script type="text/javascript">-->
+<!--           $(document).ready(function() {-->
+<!--            var table = $('#ProductTable').DataTable( {-->
+<!--                    initComplete: function () {-->
+<!--            this.api()-->
+<!--                .columns()-->
+<!--                .every(function () {-->
+<!--                    var column = this;-->
+<!--                    var select = $('<select><option value=""></option></select>')-->
+<!--                        .appendTo($(column.footer()).empty())-->
+<!--                        .on('change', function () {-->
+<!--                            var val = $.fn.dataTable.util.escapeRegex($(this).val());-->
+
+<!--                            column.search(val ? '^' + val + '$' : '', true, false).draw();-->
+<!--                        });-->
+
+<!--                    column-->
+<!--                        .data()-->
+<!--                        .unique()-->
+<!--                        .sort()-->
+<!--                        .each(function (d, j) {-->
+<!--                                if(column.search() === '^'+d+'$'){-->
+<!--                                    select.append( '<option value="'+d+'" selected="selected">'+d+'</option>' )-->
+<!--                                } else {-->
+<!--                                    select.append( '<option value="'+d+'">'+d+'</option>' )-->
+<!--                                }-->
+<!--                        });-->
+<!--                });-->
+<!--        },-->
+<!--                lengthChange: false [-->
+<!--                    [ '10 rows', '25 rows', '50 rows', '100 rows' ]-->
+<!--                ],-->
+<!--                buttons: [ 'pageLength', 'colvis', 'copy', 'excel', 'pdf' ],-->
+<!--            } );-->
+<!--            table.buttons().container()-->
+<!--                .appendTo( '#ProductTable_wrapper .col-md-6:eq(0)' );-->
+<!--        } );-->
+<!--</script>-->
+
+
+
+
+
+
+<script type="text/javascript">
+function format (comment, quantity) {
+    return '<div>Комментарии: ' + comment + '<br />Количество: ' + quantity + '</div>';
+}
+
+$(document).ready(function () {
+    var table = $('#ProductTable').DataTable({
+        columns: [
+            {
+                className: 'dt-control',
+                orderable: false,
+                data: null,
+                defaultContent: '',
+            },
+            { data: 'category' },
+            { data: 'number' },
+            { data: 'name' },
+            { data: 'description' },
+        ],
+        order: [[1, 'asc']],
+        lengthChange: false [
+            [ '10 rows', '25 rows', '50 rows', '100 rows' ]
+        ],
+        buttons: ['copy', 'excel', 'pdf', 'pageLength', 'colvis' ],
+    });
+
+
+    // Add event listener for opening and closing details
+    $('#ProductTable tbody').on('click', 'td.dt-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(tr.data('child-comment'), tr.data('child-quantity'))).show();
+            tr.addClass('shown');
+        }
+    });
+    table.buttons().container()
+        .appendTo( '#ProductTable_wrapper .col-md-6:eq(0)' );
+});
+</script>
+
+
     </body>
 </html>

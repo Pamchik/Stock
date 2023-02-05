@@ -1,14 +1,63 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import ProductForm, AddQtyForm, WriteOffQtyForm, MoveQtyFromForm, MoveQtyToForm, FormatForm
-from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ListView, FormView
-from django.db.models import Q, Sum
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ListView, FormView, TemplateView
+# from django.db.models import Q, Sum
 from .admin import TestResource
 from django.http import HttpResponse
+import json
+from django.db.models import Q
 
 
-# def test(request):
-#     return render(request, 'test.html')
+# class TestView(ListView):
+#     model = Test
+#     template_name = 'test.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["qs_json"] = json.dumps(list(Test.objects.values()))
+#         return context
+
+
+
+class StockView(TemplateView):
+    model = Product
+    template_name = 'stock.html'
+
+    def get_context_data(self, **kwargs):
+        quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
+        location_list = [p.name for p in Location.objects.all()]
+        quantity_dict = [[p.number, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
+        quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
+        product_list = [p.number for p in Product.objects.all()]
+
+        context = super().get_context_data(**kwargs)
+        context["total_table"] = list_value_product(
+                                    product_list,
+                                    location_list,
+                                    quality_list,
+                                    quantity_list,
+                                )
+        context["category"] = AssortmentCategory.objects.all()
+        context["quality"] = AssortmentQualityCategory.objects.all()
+        # context["stock"] = Product.objects.all()
+        context["product"] = Product.objects.all()
+        context["location"] = Location.objects.all()
+
+        search_by = self.request.GET.get('query')
+        search_message = "Search..."
+        if search_by:
+            search_message = search_by
+            context["search_message"] = search_message
+            context["object_list"] = Product.objects.filter(
+                Q(name__icontains=search_by) |  Q(number__icontains=search_by) |  Q(description__icontains=search_by)
+            )
+            return context
+        context["search_message"] = search_message
+        context["object_list"] = Product.objects.all()
+
+        return context
+
 
 # def test(request):
 #     quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
@@ -53,7 +102,6 @@ def list_value_product(product_list, location_list, quality_list, quantity_list)
             list_value_lvl1.append([i_location, list_value_lvl2])
         list_value.append([i_product, list_value_lvl1])
         i += 1
-
     return list_value
 
 def list_value(location_list, quality_list, quantity_list, **kwargs):
@@ -132,13 +180,12 @@ class ProductDeleteView(DeleteView):
 
 
 def stock(request):
+
     quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
     location_list = [p.name for p in Location.objects.all()]
     quantity_dict = [[p.number, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
     quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
-    # product_list = [p.name for p in Product.objects.all()]
     product_list = [p.number for p in Product.objects.all()]
-
 
     context = {
         'total_table': list_value_product(
@@ -151,9 +198,35 @@ def stock(request):
         'category': AssortmentCategory.objects.all(),
         'quality': AssortmentQualityCategory.objects.all(),
         'stock': Product.objects.all(),
+        'product': Product.objects.all(),
+        'location': Location.objects.all(),
     }
 
+
     return render(request, 'stock.html', context)
+
+
+def table(request):
+    quality_list = [p.name for p in AssortmentQualityCategory.objects.all()]
+    location_list = [p.name for p in Location.objects.all()]
+    quantity_dict = [[p.number, p.location, p.quality, p.quantity] for p in Transaction.objects.all()]
+    quantity_list = [(str(i[0]), str(i[1]), str(i[2]), int(i[3])) for i in quantity_dict]
+    product_list = [p.number for p in Product.objects.all()]
+
+    context = {
+        'total_table': list_value_product(
+            product_list,
+            location_list,
+            quality_list,
+            quantity_list,
+
+        ),
+        'product': Product.objects.all(),
+        'quality': AssortmentQualityCategory.objects.all(),
+        'location': Location.objects.all(),
+        # 'qty_product': QuantityProducts.objects.all()
+    }
+    return render(request, 'product_table.html', context)
 
 
 def home(request):

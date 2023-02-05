@@ -1,12 +1,13 @@
 from django.urls import path
 from . import views
 
-# app_name = 'Stock'
 urlpatterns = [
    path('home/', views.home, name='home'),
    path('', views.home, name='home'),
    # path('test/', views.test, name='test'),
-   path('stock/', views.stock, name='stock'),
+   # path('stock/', views.stock, name='stock'),
+   path('stock/', views.StockView.as_view(), name='stock'),
+   path('table/', views.table, name='table'),
    path('history/', views.history, name='history'),
    path('create/', views.ProductCreateView.as_view(), name='create'),
    path('stock/<str:slug>/', views.ProductDetailView.as_view(), name='product-detail'),
@@ -15,7 +16,7 @@ urlpatterns = [
    path('stock/<str:slug>/add/', views.AddQtyView.as_view(), name='add-qty'),
    path('stock/<str:slug>/move/', views.MoveQtyView, name='move-qty'),
    path('stock/<str:slug>/write-off/', views.WriteOffQtyView.as_view(), name='write-off-qty'),
-   # path('test/', views.export_data, name='test'),
-
+   # path('test/', views.TestView.as_view(), name='test'),
+   # path('test2/', views.Test2View.as_view(), name='test2'),
 
 ]
