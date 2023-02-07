@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Add</title>
+{% endblock %}
+
+{% block body %}
+<div id="layoutSidenav_content">
+
+    <div class="container">
+                <div id="layoutError">
+            <div id="layoutError_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <div class="text-center mt-4">
+                                    <h1>404</h1>
+                                    <p class="lead">Запрашиваемый URL не найден.</p>
+                                    <a href="{% url 'stock' %}">
+                                        <i class="fas fa-arrow-left me-1"></i>
+                                        Вернуться на главную страницу
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
