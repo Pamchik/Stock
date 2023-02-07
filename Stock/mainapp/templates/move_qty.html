@@ -13,6 +13,9 @@
                     <div class="card shadow-lg border-1 rounded-lg mt-3">
                         <div class="card-header">
                             <h3 class="card-title text-center">Перемещение</h3>
+                            {% for el in prod %}
+                            <h6 class="text-center">({{ el.number }} - {{ el.name }})</h6>
+                            {% endfor %}
                         </div>
                         <div class="card-body" style="display: block;">
                             <form method="post" enctype="multipart/form-data">
@@ -86,8 +89,6 @@
                                         <div id="Reason_form1">
                                             {{ form1.reason }}
                                         </div>
-                                        <!--                                            <textarea class="form-control" id="Reason_form1"-->
-                                        <!--                                                      placeholder="Опишите причину изменения количества (например: новая поставка)"></textarea>-->
                                     </div>
                                 </div>
                                 {{ form2.reason }}
@@ -109,4 +110,3 @@
 
 
 {% endblock %}
-<!--                            <a class="btn btn-secondary" href="{% url 'product-detail' product.slug %}" role="button">Назад</a>-->

@@ -9,11 +9,8 @@
     <main>
         <div class="container"><br>
             <div class="row">
-
                 <div class="card card-primary mt-3">
-                    <!--                                <div class="card-header">-->
                     <h3 class="card-title text-center">История перемещения продукции</h3>
-                    <!--                                </div>-->
                     <div class="card-body">
                         <div class="row">
                             <div class="table-responsive">
@@ -37,7 +34,6 @@
                                     {% for el in transaction %}
                                     <tr>
                                         <th scope="row">{{ el.date }}</th>
-                                        <!--                                    <th scope="row">{{ el.name }}</th>-->
                                         <td>{{ el.number }}</td>
                                         <td>{{ el.status }}</td>
                                         <td>{{ el.direction }}</td>
@@ -45,20 +41,9 @@
                                         <td>{{ el.quality }}</td>
                                         <td>{{ el.quantity }}</td>
                                         <td>{{ el.reason }}</td>
-
                                     </tr>
                                     {% endfor %}
                                     </tbody>
-<!--                                    <tfoot>-->
-<!--                                    <tr>-->
-<!--                                        <th>Name</th>-->
-<!--                                        <th>Position</th>-->
-<!--                                        <th>Office</th>-->
-<!--                                        <th>Age</th>-->
-<!--                                        <th>Start date</th>-->
-<!--                                        <th>Salary</th>-->
-<!--                                    </tr>-->
-<!--                                    </tfoot>-->
                                 </table>
                             </div>
                         </div>
@@ -66,7 +51,6 @@
                 </div>
             </div>
         </div>
-
     </main>
 </div>
 

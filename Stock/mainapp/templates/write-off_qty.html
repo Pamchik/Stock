@@ -5,36 +5,25 @@
 
 {% block body %}
 <div id="layoutSidenav_content">
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-lg border-1 rounded-lg mt-3">
                     <div class="card-header">
                         <h3 class="card-title text-center">Списание</h3>
+                        {% for el in prod %}
+                        <h6 class="text-center">({{ el.number }} - {{ el.name }})</h6>
+                        {% endfor %}
                     </div>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="card-body" style="display: block;">
-<!--                            <div class="row">-->
-                                <!--                            <div class="row mb-3">-->
-                                <!--                                <div class="form-group">-->
-                                <!--                                <label for="inputName">Название</label>-->
-                                <!--                                <div id="inputName">-->
-                                <!--                                    <input id="inputName" class="form-control" type="text" value="{{ add_qty.name }}"-->
-                                <!--                                       aria-label="Disabled input example" disabled readonly>-->
-                                {{ form.number }}
-                                <!--                                </div>-->
-                                <!--                                </div>-->
-<!--                            </div>-->
-                            <!--                           </div>-->
-<!--                            <div class="row">-->
-                                <div class="form-group">
-                                    <div id="inputStatus">
-                                        {{ form.status }}
-                                    </div>
+                            {{ form.number }}
+                            <div class="form-group">
+                                <div id="inputStatus">
+                                    {{ form.status }}
                                 </div>
-<!--                            </div>-->
+                            </div>
                             <div class="row mb-3">
                                 <div class="form-group">
                                     <div id="inputDirection">
@@ -77,12 +66,10 @@
                             <p class="text-danger">*Обязательное поле для заполнения</p>
                             <button type="submit" class="btn btn-primary btn-block">Списать</button>
                             <a class="btn btn-secondary" href="../" role="button">Отмена</a>
-
                             <span>{{ error }}</span>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -90,4 +77,3 @@
 
 
 {% endblock %}
-<!--                            <a class="btn btn-secondary" href="{% url 'product-detail' product.slug %}" role="button">Назад</a>-->

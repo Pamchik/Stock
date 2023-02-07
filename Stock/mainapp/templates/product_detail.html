@@ -7,160 +7,157 @@
     <div class="container"><br>
         <div class="row">
             <div class="card card-primary mt-3">
-<!--                <div class="card">-->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-5 align-self-center">
-                                <div class="row">
-                                    <h6 class="text-secondary">{{ product.number }}</h6>
-                                </div>
-                                    <img src="{{ product.image.url }}" alt="" class="mx-auto d-block" height="300">
-                            </div><!--end col-->
-                            <div class="col-lg-7">
-                                <div class="single-pro-detail">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-5 align-self-center">
+                            <div class="row">
+                                <h6 class="text-secondary">{{ product.number }}</h6>
+                            </div>
+                            <img src="{{ product.image.url }}" alt="" class="mx-auto d-block" height="300">
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="single-pro-detail">
 
-                                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-                                        <h1 class="h3 text-primary">{{ product.name }}</h1>
-                                        <div class="btn-group" role="group"
-                                             aria-label="Button group with nested dropdown">
-                                            <div class="btn-group" role="group">
-                                                <a class="btn btn-outline-secondary" href="{% url 'stock' %}" role="button">Назад</a>
-                                            </div>
-                                            <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-outline-secondary dropdown-toggle"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Действие
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a class="dropdown-item" href="{% url 'product-update' product.slug %}" role="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16"
-                                                                 fill="currentColor" class="bi bi-gear"
-                                                                 viewBox="0 0 16 16">
-                                                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"></path>
-                                                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"></path>
-                                                            </svg>
-                                                            Обновить
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                           href="{% url 'product-delete' product.slug %}" role="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16"
-                                                                 fill="currentColor" class="bi bi-trash3"
-                                                                 viewBox="0 0 16 16">
-                                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"></path>
-                                                            </svg>
-                                                            Удалить
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-outline-secondary dropdown-toggle"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Проводка
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                           href="{% url 'add-qty' product.slug %}" role="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16" fill="currentColor"
-                                                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                                            </svg>
-                                                            Добавить
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                           href="{% url 'move-qty' product.slug %}" role="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16" fill="currentColor"
-                                                                 class="bi bi-arrow-left-right" viewBox="0 0 16 16">
-                                                                <path fill-rule="evenodd"
-                                                                      d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
-                                                            </svg>
-                                                            Переместить
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                           href="{% url 'write-off-qty' product.slug %}" role="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16" fill="currentColor"
-                                                                 class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"></path>
-                                                            </svg>
-                                                            Списать
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+                                    <h1 class="h3 text-primary">{{ product.name }}</h1>
+                                    <div class="btn-group" role="group"
+                                         aria-label="Button group with nested dropdown">
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-outline-secondary" href="{% url 'stock' %}" role="button">Назад</a>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                Действие
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                       href="{% url 'product-update' product.slug %}" role="button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                             height="16"
+                                                             fill="currentColor" class="bi bi-gear"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"></path>
+                                                            <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"></path>
+                                                        </svg>
+                                                        Обновить
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                       href="{% url 'product-delete' product.slug %}" role="button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                             height="16"
+                                                             fill="currentColor" class="bi bi-trash3"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"></path>
+                                                        </svg>
+                                                        Удалить
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                Проводка
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                       href="{% url 'add-qty' product.slug %}" role="button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                             height="16" fill="currentColor"
+                                                             class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                        </svg>
+                                                        Добавить
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                       href="{% url 'move-qty' product.slug %}" role="button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                             height="16" fill="currentColor"
+                                                             class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                  d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                                                        </svg>
+                                                        Переместить
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                       href="{% url 'write-off-qty' product.slug %}" role="button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                             height="16" fill="currentColor"
+                                                             class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"></path>
+                                                        </svg>
+                                                        Списать
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex-wrap flex-md-nowrap align-items-center pt-3 mb-3 border-bottom">
-                                    <p>Описание: {{ product.description }}</p>
-                                    <p>Комментарии: {{ product.comment }}</p>
-                                </div>
-                                <div class="row">
+                            </div>
+                            <div class="flex-wrap flex-md-nowrap align-items-center pt-3 mb-3 border-bottom">
+                                <p>Описание: {{ product.description }}</p>
+                                <p>Комментарии: {{ product.comment }}</p>
+                            </div>
+                            <div class="row">
 
-                                    <div class="table-responsive">
+                                <div class="table-responsive">
 
-                                        <table class="table table-bordered table-sm">
+                                    <table class="table table-bordered table-sm">
 
-                                            <thead>
-                                          <div class="card-header">
+                                        <thead>
+                                        <div class="card-header">
                                             <h5 class="card-title text-center">Количество продукции</h5>
                                         </div>
-                                            </thead>
-                                            <tr>
-                                                <th scope="col"></th>
-                                                {% for el in quality %}
-                                                <th scope="col">{{ el.name }}</th>
-                                                {% endfor %}
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for el in sum_location_quality %}
-                                            <tr>
-                                                <th scope="row">{{ el.0 }}</th>
-                                                {% for value in el.1 %}
-                                                    <td>{{ value }}</td>
-                                                {% endfor %}
-                                            </tr>
+                                        </thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            {% for el in quality %}
+                                            <th scope="col">{{ el.name }}</th>
                                             {% endfor %}
-                                            <th scope="row" class="table-warning">Total</th>
-                                            {% for value in sum_total %}
-                                            <td class="table-warning">{{ value }}</td>
-<!--                                                <dt>{{ value }} шт</dt>-->
+                                        </tr>
+                                        <tbody>
+                                        {% for el in sum_location_quality %}
+                                        <tr>
+                                            <th scope="row">{{ el.0 }}</th>
+                                            {% for value in el.1 %}
+                                            <td>{{ value }}</td>
                                             {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                        <th scope="row" class="table-warning">Total</th>
+                                        {% for value in sum_total %}
+                                        <td class="table-warning">{{ value }}</td>
+                                        {% endfor %}
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    </div>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div><!--end col-->
-<!--                    </div>&lt;!&ndash;end row&ndash;&gt;-->
-                </div><!--end card-body-->
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card card-primary mt-3">
-                    <h3 class="card-title text-center">История перемещения продукции</h3>
+                <h3 class="card-title text-center">История перемещения продукции</h3>
 
-                                    <div class="card-body">
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table id="example"
-                                       class="table table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
-                                       style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
-                                       aria-describedby="datatable-buttons_info">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table id="example"
+                                   class="table table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                                   style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
+                                   aria-describedby="datatable-buttons_info">
                                 <thead>
                                 <tr>
                                     <th scope="col">Дата</th>
@@ -177,7 +174,6 @@
                                 {% for el in transaction %}
                                 <tr>
                                     <th scope="row">{{ el.date }}</th>
-<!--                                    <th scope="row">{{ el.name }}</th>-->
                                     <td>{{ el.number }}</td>
                                     <td>{{ el.status }}</td>
                                     <td>{{ el.direction }}</td>
@@ -185,71 +181,16 @@
                                     <td>{{ el.quality }}</td>
                                     <td>{{ el.quantity }}</td>
                                     <td>{{ el.reason }}</td>
-
                                 </tr>
                                 {% endfor %}
                                 </tbody>
-<!--                                    <tfoot>-->
-<!--                                    <tr>-->
-<!--                                        <th>Name</th>-->
-<!--                                        <th>Position</th>-->
-<!--                                        <th>Office</th>-->
-<!--                                        <th>Age</th>-->
-<!--                                        <th>Start date</th>-->
-<!--                                        <th>Salary</th>-->
-<!--                                    </tr>-->
-<!--                                    </tfoot>-->
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
-
-
-
-<!--                <div class="card-body">-->
-<!--                    <div class="row">-->
-<!--                        &lt;!&ndash;                            <div class="col-lg-5 align-self-center">&ndash;&gt;-->
-<!--                        <div class="table-responsive">-->
-<!--                            <table id="datatablesSimple">-->
-<!--                                <thead>-->
-<!--                                <tr>-->
-
-<!--                                    <th scope="col">Дата</th>-->
-<!--                                    <th scope="col">Номер</th>-->
-<!--                                    <th scope="col">Действие</th>-->
-<!--                                    <th scope="col">Направление</th>-->
-<!--                                    <th scope="col">Локация</th>-->
-<!--                                    <th scope="col">Качество</th>-->
-<!--                                    <th scope="col">Кол-во</th>-->
-<!--                                    <th scope="col">Причина</th>-->
-<!--                                </tr>-->
-<!--                                </thead>-->
-
-<!--                                <tbody>-->
-<!--                                {% for el in transaction %}-->
-<!--                                <tr>-->
-<!--                                    <th scope="row">{{ el.date }}</th>-->
-<!--&lt;!&ndash;                                    <th scope="row">{{ el.name }}</th>&ndash;&gt;-->
-<!--                                    <td>{{ el.number }}</td>-->
-<!--                                    <td>{{ el.status }}</td>-->
-<!--                                    <td>{{ el.direction }}</td>-->
-<!--                                    <td>{{ el.location }}</td>-->
-<!--                                    <td>{{ el.quality }}</td>-->
-<!--                                    <td>{{ el.quantity }}</td>-->
-<!--                                    <td>{{ el.reason }}</td>-->
-
-<!--                                </tr>-->
-<!--                                {% endfor %}-->
-<!--                                </tbody>-->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 
