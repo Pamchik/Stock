@@ -33,7 +33,7 @@
                                     <tbody>
                                     {% for el in transaction %}
                                     <tr>
-                                        <th scope="row">{{ el.date }}</th>
+                                        <th scope="row">{{ el.date|date:'d-m-Y' }}</th>
                                         <td>{{ el.number }}</td>
                                         <td>{{ el.status }}</td>
                                         <td>{{ el.direction }}</td>
