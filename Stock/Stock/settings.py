@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from django.core.management.commands import runserver
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,6 +26,8 @@ SECRET_KEY = 'ku=8xk2xqsq2)n8$l(3&8wdngiee1h^0stt936hnxh6m6ok&=*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = ['*']
+# runserver.default_port = '8000'
+# runserver.default_addr = '127.0.0.1'
 
 # Application definition
 

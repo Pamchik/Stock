@@ -123,21 +123,21 @@
                                         <tr>
                                             <th scope="col"></th>
                                             {% for el in quality %}
-                                            <th scope="col">{{ el.name }}</th>
+                                            <th scope="col" class="text-center">{{ el.name }}</th>
                                             {% endfor %}
                                         </tr>
                                         <tbody>
                                         {% for el in sum_location_quality %}
                                         <tr>
-                                            <th scope="row">{{ el.0 }}</th>
+                                            <th scope="row" class="text-center">{{ el.0 }}</th>
                                             {% for value in el.1 %}
-                                            <td>{{ value }}</td>
+                                            <td class="col-lg-2 text-center">{{ value }}</td>
                                             {% endfor %}
                                         </tr>
                                         {% endfor %}
-                                        <th scope="row" class="table-warning">Total</th>
+                                        <th scope="row" class="table-warning text-end">Total</th>
                                         {% for value in sum_total %}
-                                        <td class="table-warning">{{ value }}</td>
+                                        <td class="table-warning text-center">{{ value }}</td>
                                         {% endfor %}
 
                                         </tbody>
@@ -173,7 +173,7 @@
                                 <tbody>
                                 {% for el in transaction %}
                                 <tr>
-                                    <th scope="row">{{ el.date|date:'d-m-Y' }}</th>
+                                    <th scope="row">{{ el.date|date:'d.m.Y' }}</th>
                                     <td>{{ el.number }}</td>
                                     <td>{{ el.status }}</td>
                                     <td>{{ el.direction }}</td>
