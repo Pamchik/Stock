@@ -9,6 +9,7 @@
     <main>
         <div class="container"><br>
             <div class="row">
+                <div class="container">
                 <div class="card card-primary mt-3">
                     <h3 class="card-title text-center">История перемещения продукции</h3>
                     <div class="card-body">
@@ -28,6 +29,7 @@
                                         <th scope="col">Качество</th>
                                         <th scope="col">Кол-во</th>
                                         <th scope="col">Причина</th>
+                                        <th scope="col">Пользователь</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -41,6 +43,7 @@
                                         <td>{{ el.quality }}</td>
                                         <td>{{ el.quantity }}</td>
                                         <td>{{ el.reason }}</td>
+                                        <td>{{ el.author }}</td>
                                     </tr>
                                     {% endfor %}
                                     </tbody>
@@ -48,6 +51,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

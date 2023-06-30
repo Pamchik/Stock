@@ -34,12 +34,12 @@
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js"></script>
 
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>-->
-<!--<script src="{% static 'assets/demo/chart-area-demo.js' %}/"></script>-->
-<!--<script src="{% static 'assets/demo/chart-bar-demo.js' %}/"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>-->
-<!--<script src="{% static 'js/datatables-simple-demo.js' %}"></script>-->
-<!--<script src="{% static 'js/tableExport.js' %}"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>-->
+    <!--<script src="{% static 'assets/demo/chart-area-demo.js' %}/"></script>-->
+    <!--<script src="{% static 'assets/demo/chart-bar-demo.js' %}/"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>-->
+    <!--<script src="{% static 'js/datatables-simple-demo.js' %}"></script>-->
+    <!--<script src="{% static 'js/tableExport.js' %}"></script>-->
 
     {% block title %}
     {% endblock %}
@@ -49,6 +49,27 @@
     <h2 class="navbar-brand ps-3">IBS PROJECT</h2>
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
             class="fas fa-bars"></i></button>
+
+    <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 text-end">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false"><i class="fas fa-user fa-fw"></i> {{ user }}</a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+<!--                    <li><a class="dropdown-item" href="#!">Settings</a></li>-->
+                    <li><a class="dropdown-item" href="{% url 'password_change' %}">Сменить пароль</a></li>
+                    <li>
+                        <hr class="dropdown-divider"/>
+                    </li>
+                    <li><a class="dropdown-item" href="/admin/">Админка</a></li>
+                    <li>
+                        <hr class="dropdown-divider"/>
+                    </li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
@@ -56,55 +77,27 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <a class="nav-link" href="{% url 'stock' %}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Stock
+                        <div class="sb-nav-link-icon"><i class="fas fa-cubes"></i></div>
+                        Продукция
                     </a>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseHistory"
                        aria-expanded="false" aria-controls="collapseHistory">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        History
+                        <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                        История
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseHistory" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{% url 'history' %}">Movement</a>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                       aria-expanded="false" aria-controls="collapsePages">
-                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Pages
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                         data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link" href="/admin/">
-                                Admin
-                            </a>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                               data-bs-target="#pagesCollapseError" aria-expanded="false"
-                               aria-controls="pagesCollapseError">
-                                Error
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
-                                 data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="404.html">404 Page</a>
-                                </nav>
-                            </div>
+                            <a class="nav-link" href="{% url 'history' %}">Перемещение</a>
                         </nav>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
-    {% block body %}{% endblock %}
+{% block body %}{% endblock %}
 </div>
-
-
 
 
 <script>
@@ -124,6 +117,8 @@
             table.buttons().container()
                 .appendTo( '#example_wrapper .col-md-6:eq(0)' );
         } );
+
+
 
 
 </script>
@@ -173,6 +168,8 @@ $(document).ready(function () {
     table.buttons().container()
         .appendTo( '#ProductTable_wrapper .col-md-6:eq(0)' );
 });
+
+
 
 </script>
 

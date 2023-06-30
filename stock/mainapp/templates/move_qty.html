@@ -31,6 +31,8 @@
                                 <div class="row">
                                     {{ form1.number }}
                                     {{ form2.number }}
+                                    {{ form1.author }}
+                                    {{ form2.author }}
                                     {{ form1.status }}
                                     {{ form2.status }}
                                     {{ form1.direction }}
@@ -40,6 +42,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="Location_form1">Локация (откуда)</label>
+                                            <span><font color="red">*</font></span>
                                             <div id="Location_form1">
                                                 {{ form1.location }}
                                             </div>
@@ -48,6 +51,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="Location_form2">Локация (куда)</label>
+                                            <span><font color="red">*</font></span>
                                             <div id="Location_form2">
                                                 {{ form2.location }}
                                             </div>
@@ -58,6 +62,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="Quality_form1">Качество (откуда)</label>
+                                            <span><font color="red">*</font></span>
                                             <div id="Quality_form1">
                                                 {{ form1.quality }}
                                             </div>
@@ -66,6 +71,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="Quality_form2">Качество (куда)</label>
+                                            <span><font color="red">*</font></span>
                                             <div id="Quality_form2">
                                                 {{ form2.quality }}
                                             </div>
@@ -75,17 +81,17 @@
                                 <div class="row mb-3">
                                     <div class="form-group">
                                         <label for="Quantity_form1">Количество</label>
+                                        <span><font color="red">*</font></span>
                                         <div id="Quantity_form1">
                                             {{ form1.quantity }}
                                         </div>
-                                        <!--                                            <input class="form-control" id="Quantity_form1" type="text"-->
-                                        <!--                                                   placeholder="Введите целое число"/>-->
                                     </div>
                                 </div>
                                 {{ form2.quantity }}
                                 <div class="form-floating mb-3">
                                     <div class="form-group">
                                         <label for="Reason_form1">Причина</label>
+                                        <span><font color="red">*</font></span>
                                         <div id="Reason_form1">
                                             {{ form1.reason }}
                                         </div>

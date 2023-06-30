@@ -1,0 +1,42 @@
+{% extends  'base_auth.html' %}
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block main %}
+    <body>
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="login-box">
+                      <h4>Авторизация пользователя</h4>
+                      <form method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="next" value="{{ next }}">
+                        <div class="user-box">
+                            {{ form.username }}
+                          <label>Логин</label>
+                        </div>
+                        <div class="user-box">
+                            {{ form.password }}
+                          <label>Пароль</label>
+                        </div>
+                        <div class="text">
+                            <font color="red" size="2">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    {{ error|escape }}
+                                {% endfor %}
+                            {% endfor %}
+                            </font>
+                        </div>
+                        <button type="submit" class="btn">Войти</button>
+                      </form>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+    </body>
+{% endblock %}
+

@@ -1,5 +1,6 @@
 from django.db import models
 from autoslug import AutoSlugField
+from django.contrib.auth.models import User
 
 
 class AssortmentCategory(models.Model):
@@ -82,6 +83,10 @@ class Status(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Status'
+        verbose_name_plural = 'Statuses'
+
 
 class Transaction(models.Model):
     number = models.ForeignKey(Product, verbose_name="Номер продукта", on_delete=models.CASCADE, null=False)
@@ -94,6 +99,7 @@ class Transaction(models.Model):
     reason = models.TextField(max_length=2000, verbose_name="Причина перемещения", null=False)
     slug = AutoSlugField(populate_from='number', editable=False, always_update=True)
     date = models.DateField(verbose_name="Дата", auto_now_add=True)
+    author = models.ForeignKey(User,  on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.number

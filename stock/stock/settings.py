@@ -16,6 +16,8 @@ from django.core.management.commands import runserver
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#STATIC_PRODUCTION_DIR = os.path.abspath(os.path.join(
+#os.path.dirname(__file__), '..', 'static_prod'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -41,6 +43,9 @@ INSTALLED_APPS = [
     'mainapp',
     'django_cleanup',
     'import_export',
+    'crispy_forms',
+    'crispy_bootstrap5',
+
 ]
 
 MIDDLEWARE = [
@@ -117,17 +122,36 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = 'static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
 
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if DEBUG:
+    STATICFILES_DIRS = [
+       os.path.join(BASE_DIR, 'static'),
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
-# ]
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL  = '/login/'
+
+CRISPY_CLASS_CONVERTERS = {
+    'textinput': "form-control cst__radius",
+    'urlinput': "form-control cst__radius",
+    'numberinput': "form-control cst__radius",
+    'emailinput': "form-control cst__radius",
+    'dateinput': "form-control cst__radius",
+    'textarea': "form-control cst__radius",
+    'passwordinput': "form-control cst__radius",
+    'select': "form-control cst__radius",
+}

@@ -20,6 +20,7 @@
                         {% csrf_token %}
                         <div class="card-body" style="display: block;">
                             {{ form.number }}
+                            {{ form.author }}
                             <div class="form-group">
                                 <div id="inputStatus">
                                     {{ form.status }}
@@ -34,7 +35,8 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="form-group">
-                                    <label for="inputLocation">*Локация</label>
+                                    <label for="inputLocation">Локация</label>
+                                    <span><font color="red">*</font></span>
                                     <div id="inputLocation">
                                         {{ form.location }}
                                     </div>
@@ -42,7 +44,8 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="form-group">
-                                    <label for="inputQuality">*Качество</label>
+                                    <label for="inputQuality">Качество</label>
+                                    <span><font color="red">*</font></span>
                                     <div id="inputQuality">
                                         {{ form.quality }}
                                     </div>
@@ -51,7 +54,8 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="form-group">
-                                    <label for="inputQuantity">*Количество</label>
+                                    <label for="inputQuantity">Количество</label>
+                                    <span><font color="red">*</font></span>
                                     <div id="inputQuantity">
                                         {{ form.quantity }}
                                     </div>
@@ -59,9 +63,11 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="form-group">
-                                    <label for="inputReason">*Причина</label>
+                                    <label for="inputReason">Причина</label>
+                                    <span><font color="red">*</font></span>
                                     <div id="inputReason">
                                         {{ form.reason }}
+
                                     </div>
                                 </div>
                             </div>
